@@ -130,7 +130,6 @@ export type LandingContent = {
     title: string;
     tools: ToolId[];
     status: string;
-    closing: string;
   };
 
   /** "Cada persona de tu equipo": qué le da Fivo a cada rol y una pregunta de ejemplo. */

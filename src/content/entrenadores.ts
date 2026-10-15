@@ -13,6 +13,7 @@ export const entrenadores: LandingContent = {
   thanksPath: "/entrenadores/gracias",
   repeatCta: true,
   ctaLines: {
+    conexion: "GoHighLevel sabe cómo entró cada cliente. Harbiz sabe cómo entrena. Fivo te dice lo que pasa entre medias.",
     herramientas: "¿Ya usas GoHighLevel y Harbiz? Te enseñamos cómo quedaría todo conectado.",
     equipo: "Te enseñamos cómo lo usaría cada persona de tu equipo.",
     ia: "¿Usas Claude o ChatGPT? En la llamada te enseñamos cómo quedaría con tu negocio.",
@@ -122,7 +123,6 @@ export const entrenadores: LandingContent = {
     title: "Conecta GoHighLevel y Harbiz. Fivo une las dos historias.",
     tools: ["gohighlevel", "harbiz"],
     status: "Conectado",
-    closing: "GoHighLevel sabe cómo entró cada cliente. Harbiz sabe cómo entrena. Fivo te dice lo que pasa entre medias.",
   },
 
   team: {

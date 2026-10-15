@@ -12,9 +12,13 @@ type Problem = LandingContent["problem"];
 
 const nodesOf = (groups: Problem["groups"]) => groups.flatMap((g) => g.nodes.map((n) => ({ ...n, group: g.id, cx: g.cx, cy: g.cy })));
 
-/** Las herramientas sueltas, en grupos aislados. Cada dolor resalta el suyo. */
-function Field({ problem, active, instant = false, label }: { problem: Problem; active: number; instant?: boolean; label: string }) {
-  const { groups, pains } = problem;
+/**
+ * Las herramientas sueltas, en grupos aislados. `lit` dice qué grupos se han encendido ya (entrada única) y
+ * `hover` cuál resalta el ratón. Encendido = anillo y etiqueta en accent; resaltado = además un halo suave.
+ * Todos los grupos encendidos se ven igual: ninguno brilla más que otro salvo el resaltado.
+ */
+function Field({ problem, lit, hover, label }: { problem: Problem; lit: boolean[]; hover: string | null; label: string }) {
+  const { groups } = problem;
   const NODES = useMemo(() => nodesOf(groups), [groups]);
   const box = useRef<HTMLDivElement>(null);
   const [size, setSize] = useState({ w: 560, h: 380 });
@@ -26,31 +30,35 @@ function Field({ problem, active, instant = false, label }: { problem: Problem; 
     return () => ro.disconnect();
   }, []);
   const { w, h } = size;
-  const hiGroup = pains[active]?.group;
+  const on = (g: string) => lit[groups.findIndex((G) => G.id === g)] ?? false;
 
   return (
-    <div ref={box} className="relative h-[350px] w-full sm:h-[360px] lg:h-[380px]" role="img" aria-label={label}>
-      {/* Anillos discontinuos y etiquetas de cada grupo aislado */}
+    <div ref={box} className="relative h-[420px] w-full sm:h-[360px] lg:h-[380px]" role="img" aria-label={label}>
       {groups.map((G) => {
-        const g = G.id;
-        const hi = hiGroup === g;
-        const dim = active !== -1 && !hi;
+        const isOn = on(G.id);
+        const hi = hover === G.id;
         return (
-          <div key={g} className="absolute left-0 top-0" style={{ transform: `translate(${G.cx * w}px, ${G.cy * h}px)`, opacity: dim ? 0.3 : 1, transition: instant ? "none" : `opacity 500ms ${EASE}` }} aria-hidden>
+          <div key={G.id} className="absolute left-0 top-0" style={{ transform: `translate(${G.cx * w}px, ${G.cy * h}px)` }} aria-hidden>
+            {/* Anillo apagado (line-strong) y, encima, el encendido (accent) y el halo del resaltado: solo cambia su opacidad */}
+            <span className="absolute left-0 top-0 rounded-full border border-dashed border-line-strong" style={{ width: G.ring[0], height: G.ring[1], transform: "translate(-50%,-50%)" }} />
             <span
-              className="absolute left-0 top-0 rounded-full border border-dashed"
+              className="absolute left-0 top-0 rounded-full border border-dashed border-accent"
+              style={{ width: G.ring[0], height: G.ring[1], transform: `translate(-50%,-50%) scale(${hi ? 1.05 : 1})`, opacity: isOn ? 0.75 : 0, transition: `opacity 600ms ${EASE}, transform 500ms ${EASE}` }}
+            />
+            <span
+              className="absolute left-0 top-0 rounded-full"
               style={{
                 width: G.ring[0],
                 height: G.ring[1],
-                borderColor: hi ? "var(--color-accent)" : "var(--color-line-strong)",
-                boxShadow: hi ? "0 0 36px color-mix(in srgb, var(--color-accent) 25%, transparent)" : "none",
-                transform: `translate(-50%,-50%) scale(${hi ? 1.06 : 1})`,
-                transition: `all 500ms ${EASE}`,
+                transform: `translate(-50%,-50%) scale(${hi ? 1.05 : 1})`,
+                boxShadow: "0 0 36px color-mix(in srgb, var(--color-accent) 28%, transparent)",
+                opacity: hi ? 1 : 0,
+                transition: `opacity 400ms ${EASE}, transform 500ms ${EASE}`,
               }}
             />
             <span
               className="absolute left-0 whitespace-nowrap rounded-[6px] border bg-surface px-3 py-1 text-[13px] font-medium"
-              style={{ top: G.labelTop, transform: "translate(-50%, 0)", borderColor: hi ? "var(--color-accent)" : "var(--color-line)", color: hi ? "var(--color-fg)" : "var(--color-fg-muted)", transition: `all 400ms ${EASE}` }}
+              style={{ top: G.labelTop, transform: "translate(-50%, 0)", borderColor: isOn ? "var(--color-accent)" : "var(--color-line)", color: isOn ? "var(--color-fg)" : "var(--color-fg-muted)", transition: `color 600ms ${EASE}, border-color 600ms ${EASE}` }}
             >
               {G.label}
             </span>
@@ -59,17 +67,15 @@ function Field({ problem, active, instant = false, label }: { problem: Problem; 
       })}
 
       {NODES.map((n) => {
-        const hi = hiGroup === n.group;
+        const isOn = on(n.group);
         return (
           <span
             key={n.f}
-            className="absolute left-0 top-0 flex h-12 w-12 items-center justify-center rounded-full border bg-fg"
+            className="absolute left-0 top-0 flex h-12 w-12 items-center justify-center rounded-full bg-fg"
             style={{
               transform: `translate3d(${(n.cx * w + n.dx).toFixed(1)}px,${(n.cy * h + n.dy).toFixed(1)}px,0) translate(-50%,-50%)`,
-              opacity: active !== -1 && !hi ? 0.3 : 0.75,
-              borderColor: hi ? "var(--color-accent)" : "transparent",
-              boxShadow: hi ? "0 0 0 4px color-mix(in srgb, var(--color-accent) 12%, transparent)" : "none",
-              transition: instant ? "none" : `opacity 500ms ${EASE}, border-color 400ms, box-shadow 500ms`,
+              opacity: isOn ? 1 : 0.45,
+              transition: `opacity 600ms ${EASE}`,
               zIndex: 2,
             }}
           >
@@ -82,78 +88,57 @@ function Field({ problem, active, instant = false, label }: { problem: Problem; 
   );
 }
 
-function Pains({ pains, active, reduced, pick }: { pains: Problem["pains"]; active: number; reduced: boolean; pick: (i: number) => void }) {
+/** Las tres frases, enteras y con el mismo peso. En escritorio, pasar el ratón por una resalta su grupo. */
+function Pains({ pains, onHover }: { pains: Problem["pains"]; onHover: (g: string | null) => void }) {
   return (
-    <ul className="divide-y divide-line">
-      {pains.map((p, i) => {
-        const on = active === i || reduced;
-        return (
-          <li key={p.text}>
-            <button
-              type="button"
-              aria-pressed={active === i}
-              onPointerEnter={() => pick(i)}
-              onFocus={() => pick(i)}
-              onClick={() => pick(i)}
-              className="flex w-full cursor-pointer items-start gap-4 py-5 text-left first:pt-0"
-            >
-              <i aria-hidden className="status-dot mt-[13px] sm:mt-[15px]" style={{ color: active === i ? "var(--color-accent)" : "var(--color-fg-subtle)", transition: `color 300ms ${EASE}` }} />
-              <span className="font-display text-xl font-bold leading-snug sm:text-2xl" style={{ color: active === -1 || active === i || on ? "var(--color-fg)" : "var(--color-fg-muted)", transition: "color 300ms" }}>
-                {p.text}
-              </span>
-            </button>
-          </li>
-        );
-      })}
+    <ul className="divide-y divide-line" onPointerLeave={() => onHover(null)}>
+      {pains.map((p) => (
+        <li
+          key={p.text}
+          className="flex items-start gap-4 py-5 first:pt-0"
+          onPointerEnter={(e) => e.pointerType === "mouse" && onHover(p.group)}
+        >
+          <i aria-hidden className="status-dot mt-[13px] text-accent sm:mt-[15px]" />
+          <span className="font-display text-xl font-bold leading-snug text-fg sm:text-2xl">{p.text}</span>
+        </li>
+      ))}
     </ul>
   );
 }
 
 /**
- * El problema: los tres dolores y las herramientas sueltas, en grupos aislados. Al entrar, cada dolor
- * resalta su grupo una vez; después queda en reposo y el visitante puede recorrerlos. La conexión la
- * enseña la sección siguiente (GoHighLevel y Harbiz unidos en el grafo de Fivo).
+ * El problema: las tres frases y las herramientas sueltas, en grupos aislados. Sin scroll anclado: al entrar la
+ * sección en pantalla, los tres grupos se encienden una vez, uno detrás de otro, y se quedan encendidos. Con
+ * movimiento reducido, todo encendido desde el principio. La conexión la enseña la sección de GoHighLevel y Harbiz.
  */
 export default function ProblemScene() {
   const { problem } = useLanding();
   const reduced = useReducedMotion();
-  const [ref, inView] = useInView<HTMLDivElement>({ threshold: 0.4 });
-  const [active, setActive] = useState(-1);
-  const touched = useRef(false);
+  const [ref, inView] = useInView<HTMLDivElement>({ threshold: 0.35 });
+  const n = problem.groups.length;
+  const [lit, setLit] = useState<boolean[]>(() => Array(n).fill(false));
+  const [hover, setHover] = useState<string | null>(null);
   const label = "Herramientas de leads y ventas, de tu equipo y de clientes y pagos, sueltas y sin conexión entre ellas.";
 
   useEffect(() => {
-    if (!inView || reduced) return;
-    const ids = [0, 1, 2].map((i) => window.setTimeout(() => !touched.current && setActive(i), 400 + i * 1900));
-    const end = window.setTimeout(() => !touched.current && setActive(-1), 400 + 3 * 1900);
-    return () => [...ids, end].forEach(window.clearTimeout);
-  }, [inView, reduced]);
-
-  const pick = (i: number) => {
-    touched.current = true;
-    setActive(i);
-  };
-
-  if (reduced) {
-    return (
-      <div className="grid gap-8 lg:grid-cols-12 lg:items-center lg:gap-10">
-        <div className="lg:col-span-5">
-          <Pains pains={problem.pains} active={-1} reduced pick={() => {}} />
-        </div>
-        <div className="lg:col-span-7">
-          <Field problem={problem} active={-1} instant label={label} />
-        </div>
-      </div>
-    );
-  }
+    if (reduced) {
+      setLit(Array(n).fill(true));
+      return;
+    }
+    if (!inView) return;
+    // En el orden de las frases: cada grupo se enciende cuando le toca a su frase
+    const order = problem.pains.map((p) => problem.groups.findIndex((G) => G.id === p.group)).filter((i) => i >= 0);
+    const ids = order.map((gi, k) => window.setTimeout(() => setLit((l) => l.map((v, j) => (j === gi ? true : v))), 200 + k * 450));
+    return () => ids.forEach(window.clearTimeout);
+  }, [inView, reduced, n, problem]);
 
   return (
     <div ref={ref} className="grid gap-8 lg:grid-cols-12 lg:items-center lg:gap-10">
       <div className="lg:col-span-5">
-        <Pains pains={problem.pains} active={active} reduced={false} pick={pick} />
+        <Pains pains={problem.pains} onHover={setHover} />
       </div>
       <div className="lg:col-span-7">
-        <Field problem={problem} active={active} label={label} />
+        <Field problem={problem} lit={lit} hover={reduced ? null : hover} label={label} />
       </div>
     </div>
   );

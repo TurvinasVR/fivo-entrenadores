@@ -16,7 +16,6 @@ export const entrenadores: LandingContent = {
     herramientas: "¿Ya usas GoHighLevel y Harbiz? Te enseñamos cómo quedaría todo conectado.",
     equipo: "Te enseñamos cómo lo usaría cada persona de tu equipo.",
     ia: "¿Usas Claude o ChatGPT? En la llamada te enseñamos cómo quedaría con tu negocio.",
-    problema: "Así se ve con Fivo. En la llamada lo vemos con tu negocio.",
     "como-funciona": "Te lo enseñamos con un negocio como el tuyo en **30 minutos**.",
     pregunta: "¿Qué le preguntarías tú a tu negocio? Tráelo a la llamada y lo vemos.",
     prueba: "Mira si encaja con tu negocio.",
@@ -31,17 +30,16 @@ export const entrenadores: LandingContent = {
     videoLabel: "Vídeo de Fivo para entrenadores personales",
     videoEnd: { title: "¿Lo vemos con tu negocio?", replay: "Volver a ver" },
     trust: "Cumple RGPD. Datos alojados en la UE. Tú decides quién ve qué.",
+    integrations: { tools: ["gohighlevel", "harbiz"], text: "Se conecta con GoHighLevel y Harbiz" },
   },
 
   tools: {
     ids: ["gohighlevel", "harbiz", "zoom", "meet", "stripe", "gmail", "notion", "slack", "chatgpt", "claude"],
     title: "Se conecta a todo lo que usa tu equipo",
     intro: "Pulsa una herramienta para ver qué lee Fivo.",
+    featured: ["gohighlevel", "harbiz"],
     srList:
       "GoHighLevel, Harbiz, Zoom, Google Meet, Stripe, Gmail, Notion y Slack, y ChatGPT y Claude vía MCP.",
-    after: {
-      main: "GoHighLevel sabe cómo entró cada cliente. Harbiz sabe cómo entrena. Fivo une las dos historias.",
-    },
   },
 
   sources: {
@@ -51,6 +49,7 @@ export const entrenadores: LandingContent = {
         id: "gohighlevel",
         name: "GoHighLevel",
         tools: ["gohighlevel"],
+        featured: true,
         data: [
           "Contactos y sus etiquetas",
           "Origen del lead: anuncio, formulario o campaña",
@@ -65,6 +64,7 @@ export const entrenadores: LandingContent = {
         id: "harbiz",
         name: "Harbiz",
         tools: ["harbiz"],
+        featured: true,
         data: [
           "Clientes",
           "Planes de entrenamiento",
@@ -116,6 +116,13 @@ export const entrenadores: LandingContent = {
       },
     ],
     footer: "No cambias ninguna herramienta. Tu equipo sigue trabajando igual.",
+  },
+
+  connect: {
+    title: "Conecta GoHighLevel y Harbiz. Fivo une las dos historias.",
+    tools: ["gohighlevel", "harbiz"],
+    status: "Conectado",
+    closing: "GoHighLevel sabe cómo entró cada cliente. Harbiz sabe cómo entrena. Fivo te dice lo que pasa entre medias.",
   },
 
   team: {
@@ -221,14 +228,6 @@ export const entrenadores: LandingContent = {
           { f: "googledrive.svg", dx: 14, dy: 30 },
         ],
       },
-    ],
-    compare: true,
-    rows: [
-      { topic: "Saber cómo va un cliente", today: "Abrir Harbiz, mirar sus check-ins y preguntar a su coach", fivo: "Preguntarlo y tenerlo en una respuesta" },
-      { topic: "Preparar una llamada de venta", today: "Buscar al lead en GoHighLevel y leer todo su chat", fivo: "Un resumen con lo que quiere y lo que le frena" },
-      { topic: "Saber qué hace bien tu mejor closer", today: "Escuchar grabaciones que nunca tienes tiempo de escuchar", fivo: "Lo que repite en las llamadas que cierra" },
-      { topic: "Pasar un cliente del closer al coach", today: "Un mensaje en WhatsApp y esperar que no se pierda nada", fivo: "El coach ve lo que se le prometió en la venta" },
-      { topic: "Usar Claude o ChatGPT", today: "Explicarle tu método cada vez", fivo: "Ya conoce tu método, tus clientes y tu equipo" },
     ],
   },
 

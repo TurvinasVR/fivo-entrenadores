@@ -3,6 +3,7 @@ import { rich } from "@/lib/rich";
 import { ClientLogos } from "./ClientLogos";
 import { CtaBlock } from "./CtaBlock";
 import { MainVsl } from "./VideoPlayer";
+import { ToolDisc } from "./ToolDisc";
 
 /** Las cifras de escala en pequeño, bajo el botón (en lugar de los logotipos de clientes). */
 function ScaleLine({ figures }: { figures: LandingContent["proof"]["scale"] }) {
@@ -45,6 +46,18 @@ export function Hero({ content }: { content: LandingContent }) {
         </h1>
 
         <p className="mt-3 max-w-[760px] text-[15px] leading-[1.5] text-fg-muted sm:text-base">{hero.subtitle}</p>
+
+        {/* Las dos integraciones que más pesan para este público, a la vista desde la primera pantalla */}
+        {hero.integrations && (
+          <p className="mt-3 flex items-center justify-center gap-2.5 text-[14px] font-medium text-fg-muted sm:text-[15px]">
+            <span className="flex items-center gap-1.5" aria-hidden>
+              {hero.integrations.tools.map((id) => (
+                <ToolDisc key={id} id={id} size={30} eager />
+              ))}
+            </span>
+            {hero.integrations.text}
+          </p>
+        )}
 
         <div className="hero-video mt-4 w-full lg:mt-4">
           <MainVsl slug={slug} label={hero.videoLabel} endCta={hero.videoEnd} />

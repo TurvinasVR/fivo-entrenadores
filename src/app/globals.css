@@ -451,3 +451,25 @@ html[data-booking] .cal-slot { display: inline-block; }
 /* Iconos con el degradado (el <linearGradient id="fivo-grad"> está en el layout). Se activa tras la carga: ver BrandIcons */
 .icon-brand { fill: var(--color-accent); }
 html[data-brand-icons] .icon-brand { fill: url(#fivo-grad); }
+
+/* Conexión de GoHighLevel y Harbiz con el nodo de Fivo: un pulso de luz viaja de cada bloque hacia el nodo */
+.conn-pulse {
+  position: absolute;
+  width: 7px;
+  height: 7px;
+  border-radius: 9999px;
+  background: var(--color-accent);
+  box-shadow: 0 0 10px var(--color-accent);
+  opacity: 0;
+  /* Tres pasadas al entrar en pantalla, nada en bucle (DESIGN.md) */
+  animation: 2.4s cubic-bezier(0.16, 1, 0.3, 1) 3 both;
+}
+.conn-pulse--x-a { left: 0; top: 50%; margin-top: -3.5px; animation-name: conn-x-a; }
+.conn-pulse--x-b { right: 0; top: 50%; margin-top: -3.5px; animation-name: conn-x-b; }
+.conn-pulse--y-a { top: 0; left: 50%; margin-left: -3.5px; animation-name: conn-y-a; }
+.conn-pulse--y-b { bottom: 0; left: 50%; margin-left: -3.5px; animation-name: conn-y-b; }
+@keyframes conn-x-a { 0% { transform: translateX(0); opacity: 0; } 15% { opacity: 1; } 70%, 100% { transform: translateX(66px); opacity: 0; } }
+@keyframes conn-x-b { 0% { transform: translateX(0); opacity: 0; } 15% { opacity: 1; } 70%, 100% { transform: translateX(-66px); opacity: 0; } }
+@keyframes conn-y-a { 0% { transform: translateY(0); opacity: 0; } 15% { opacity: 1; } 70%, 100% { transform: translateY(30px); opacity: 0; } }
+@keyframes conn-y-b { 0% { transform: translateY(0); opacity: 0; } 15% { opacity: 1; } 70%, 100% { transform: translateY(-30px); opacity: 0; } }
+@media (prefers-reduced-motion: reduce) { .conn-pulse { display: none; } }

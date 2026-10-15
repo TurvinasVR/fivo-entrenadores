@@ -90,6 +90,8 @@ export type LandingContent = {
     /** Pantalla final del vídeo: titular y texto del botón de repetir. Sin esto, el vídeo termina sin pantalla final. */
     videoEnd?: { title: string; replay: string };
     trust: string;
+    /** Línea bajo el subtítulo con los logotipos de las integraciones principales. */
+    integrations?: { tools: ToolId[]; text: string };
   };
 
   tools: {
@@ -97,6 +99,8 @@ export type LandingContent = {
     title: string;
     intro?: string;
     srList: string;
+    /** Herramientas destacadas en el anillo (van primero en `ids`). */
+    featured?: ToolId[];
     after?: { main: string; small?: string };
   };
 
@@ -112,8 +116,21 @@ export type LandingContent = {
       question?: string;
       /** Sin datos ni pregunta: una frase sola (p. ej. "Todo lo demás"). */
       note?: string;
+      /** Integración principal: va primero y destacada. */
+      featured?: boolean;
     }[];
     footer: string;
+  };
+
+  /**
+   * "Conecta GoHighLevel y Harbiz": un bloque por herramienta y la conexión hacia el grafo de Fivo. Los datos y
+   * la pregunta de cada bloque salen del grupo de `sources` con el mismo id, para que digan lo mismo en los dos sitios.
+   */
+  connect: {
+    title: string;
+    tools: ToolId[];
+    status: string;
+    closing: string;
   };
 
   /** "Cada persona de tu equipo": qué le da Fivo a cada rol y una pregunta de ejemplo. */
@@ -135,9 +152,6 @@ export type LandingContent = {
     title: { muted?: string; main: string };
     pains: { text: string; group: string }[];
     groups: ProblemGroup[];
-    rows: { topic: string; today: string; fivo: string }[];
-    /** Comparación en un solo panel de filas (en vez de cuatro tarjetas). */
-    compare?: boolean;
   };
 
   how: {

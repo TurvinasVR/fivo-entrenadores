@@ -16,6 +16,7 @@ export type CtaPosition =
   | "fijo-movil"
   | "gracias"
   | "herramientas"
+  | "conexion"
   | "equipo"
   | "ia"
   | "problema"

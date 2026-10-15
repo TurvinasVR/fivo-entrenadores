@@ -131,10 +131,12 @@ export function SourcesDetail({
               tabIndex={sel === i ? 0 : -1}
               onClick={() => onSelect(i)}
               onKeyDown={(e) => onKey(e, i)}
-              className={`min-h-[44px] cursor-pointer rounded-[8px] border px-4 text-[15px] font-semibold transition-colors duration-200 ${
-                sel === i ? "border-accent bg-accent-soft text-fg" : "border-line bg-surface text-fg-muted hover:border-line-strong hover:text-fg"
+              className={`flex min-h-[44px] cursor-pointer items-center gap-2 rounded-[8px] border text-[15px] font-semibold transition-colors duration-200 ${it.featured ? "pl-1.5 pr-4" : "px-4"} ${
+                sel === i ? "border-accent bg-accent-soft text-fg" : `border-line bg-surface hover:border-line-strong hover:text-fg ${it.featured ? "text-fg" : "text-fg-muted"}`
               }`}
             >
+              {/* GoHighLevel y Harbiz, primero y con su logotipo; el resto, solo el nombre */}
+              {it.featured && <ToolDisc id={it.tools[0]} size={30} />}
               {it.name}
             </button>
           ))}
@@ -175,8 +177,8 @@ export function SourcesDetail({
                 onClick={() => onOpen(isOpen ? -1 : i)}
                 className="flex min-h-[60px] w-full cursor-pointer items-center gap-3 py-3 text-left text-[16px] font-semibold"
               >
-                <Stack item={it} />
-                <span className="flex-1">{it.name}</span>
+                <Stack item={it} size={it.featured ? 38 : 30} />
+                <span className={`flex-1 ${it.featured ? "text-[17px] text-fg" : "text-fg-muted"}`}>{it.name}</span>
                 <CaretDown size={16} aria-hidden className="shrink-0 text-fg-muted transition-transform duration-300" style={{ transform: isOpen ? "rotate(180deg)" : "none" }} />
               </button>
               <div id={`fuente-acc-${it.id}`} className="grid transition-[grid-template-rows] duration-300" style={{ gridTemplateRows: isOpen ? "1fr" : "0fr" }} inert={!isOpen}>

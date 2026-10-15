@@ -166,6 +166,8 @@ export function ToolsScene() {
           {TOOLS.map((n, i) => {
             const on = lit === i;
             const chosen = groupOf[i] >= 0 && groupOf[i] === sel;
+            // GoHighLevel y Harbiz: disco más grande, borde line-strong y nombre en fg (el borde accent queda para elegir)
+            const featured = tools.featured?.includes(n.id) ?? false;
             const style: React.CSSProperties = is3d
               ? { left: 0, top: 0 }
               : ({ ...pos(i), transform: "translate(-50%,-50%)" } as React.CSSProperties);
@@ -196,17 +198,23 @@ export function ToolsScene() {
                     setLit(i);
                     showSource(i);
                   }}
-                  className="flex h-12 w-12 cursor-pointer items-center justify-center rounded-full border-2 bg-fg"
+                  className={`flex cursor-pointer items-center justify-center rounded-full border-2 bg-fg ${featured ? "h-[60px] w-[60px]" : "h-12 w-12"}`}
                   style={{
-                    borderColor: on || chosen ? "var(--color-accent)" : "transparent",
+                    borderColor: on || chosen ? "var(--color-accent)" : featured ? "var(--color-line-strong)" : "transparent",
                     boxShadow: on || chosen ? "0 0 0 4px var(--color-accent-soft)" : "none",
                     transition: `border-color ${DUR.micro}ms ${EASE_CSS}, box-shadow ${DUR.micro}ms ${EASE_CSS}`,
                   }}
                 >
                   {/* eslint-disable-next-line @next/next/no-img-element */}
-                  <img src={`/logos/tools/${n.file}`} alt="" width={logoBox(n.file)} height={logoBox(n.file)} style={{ width: logoBox(n.file), height: logoBox(n.file) }} />
+                  <img
+                    src={`/logos/tools/${n.file}`}
+                    alt=""
+                    width={logoBox(n.file)}
+                    height={logoBox(n.file)}
+                    style={{ width: Math.round(logoBox(n.file) * (featured ? 1.25 : 1)), height: Math.round(logoBox(n.file) * (featured ? 1.25 : 1)) }}
+                  />
                 </button>
-                <span className="absolute left-1/2 top-full mt-1.5 w-max max-w-[92px] -translate-x-1/2 px-1 text-center text-[13px] leading-tight text-fg-muted">
+                <span className={`absolute left-1/2 top-full mt-1.5 w-max max-w-[92px] -translate-x-1/2 px-1 text-center leading-tight ${featured ? "text-[14px] font-semibold text-fg" : "text-[13px] text-fg-muted"}`}>
                   {n.name}
                   {n.mcp && <span className="block text-[12px] text-fg-muted">vía MCP</span>}
                 </span>

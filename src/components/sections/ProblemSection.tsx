@@ -2,9 +2,8 @@
 
 import ProblemScene from "./ProblemScene";
 import { useLanding } from "../landing/LandingContext";
-import { BlockCta } from "../landing/BlockCta";
 
-/** Bloque 4. El problema: los mismos nodos, pero sueltos. Cada dolor resalta un grupo aislado. */
+/** El problema: las herramientas sueltas. Cada dolor resalta un grupo aislado. Su botón va al final de la sección siguiente. */
 export function ProblemSection() {
   const { problem } = useLanding();
   return (
@@ -17,8 +16,6 @@ export function ProblemSection() {
         <div className="mt-8 lg:mt-10">
           <ProblemScene />
         </div>
-        {/* El botón del bloque está desde el primer momento: nunca un hueco reservado y vacío */}
-        <BlockCta position="problema" />
       </div>
     </section>
   );

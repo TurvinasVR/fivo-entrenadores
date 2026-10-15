@@ -2,6 +2,16 @@
 
 /* Sistema de diseño de Fivo (ver DESIGN.md). Un solo tema: oscuro, bloqueado.
    Todo color sale de aquí. Las escenas WebGL leen los mismos valores de src/lib/scene/tokens.ts. */
+/* Fuente de reserva de Manrope: Arial ajustada con los mismos valores que generaba next/font/google para Manrope */
+@font-face {
+  font-family: "Manrope Fallback";
+  src: local("Arial");
+  ascent-override: 103.31%;
+  descent-override: 29.07%;
+  line-gap-override: 0%;
+  size-adjust: 103.19%;
+}
+
 @theme {
   --color-bg: #08090b;
   --color-surface: #111215;

@@ -1,5 +1,4 @@
 import type { Metadata, Viewport } from "next";
-import { Manrope } from "next/font/google";
 import localFont from "next/font/local";
 import "./globals.css";
 import { landingMetadata } from "@/content/meta";
@@ -9,11 +8,16 @@ import { CookieBanner } from "@/components/CookieBanner";
 import { BrandIcons } from "@/components/BrandIcons";
 import { VisitorCode } from "@/components/VisitorCode";
 
-// Manrope: toda la interfaz (sistema de diseño de Fivo). next/font la autoaloja en el build.
-const manrope = Manrope({
-  subsets: ["latin"],
-  weight: ["400", "500", "600", "700"],
+// Manrope: toda la interfaz (sistema de diseño de Fivo). Dentro del proyecto, como Satoshi, para que la compilación no
+// dependa de Google Fonts. Es el mismo archivo que servía Google (variable, subconjunto latino) declarado solo para los
+// pesos que se usan (400 a 700). La fuente de reserva lleva el mismo ajuste que calculaba next/font/google
+// ("Manrope Fallback" en globals.css), así que no cambia nada al cargar.
+const manrope = localFont({
+  src: [{ path: "./fonts/manrope-latin.woff2", weight: "400 700", style: "normal" }],
   display: "swap",
+  preload: true,
+  adjustFontFallback: false,
+  fallback: ["Manrope Fallback"],
   variable: "--font-manrope",
 });
 

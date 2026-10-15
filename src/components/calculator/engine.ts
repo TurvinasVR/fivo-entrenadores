@@ -32,7 +32,7 @@ export function initCalculator(root: HTMLElement, host: CalculatorHost): () => v
 
   var D = {
     es:{
-      tierUp:"Hasta {a}", tierMid:"{a} – {b}", tierOver:"Más de {a}",
+      tierUp:"Hasta {a}", tierMid:"{a} a {b}", tierOver:"Más de {a}",
       appsHintCap:"No puede superar tu gasto total en aplicaciones. Usamos {a} al mes.",
       recEq:"≈ {h} h por persona y semana, sobre el {p} de la semana que se va buscando información.",
       exTag:"EJEMPLO ILUSTRATIVO", exPeople:"Personas", exSpend:"Gasto anual", exRevenue:"Ingresos anuales",
@@ -497,16 +497,16 @@ export function initCalculator(root: HTMLElement, host: CalculatorHost): () => v
     var S = STATIC.es, bm = breakdownModel(r), yes = "Sí", no = "No";
     var secOpt = state.sector ? $("sec-"+state.sector) : null;
     var inputs = [
-      {label:"Sector", value: secOpt ? secOpt.querySelector("span").textContent : "—"},
+      {label:"Sector", value: secOpt ? secOpt.querySelector("span").textContent : "-"},
       {label:S.w024, value:group(r.reps)},
       {label:S.w025, value:group(r.rest)},
       {label:S.s019, value:eur(r.team)},
       {label:S.s021, value:eur(r.calls)},
-      {label:S.w032, value: state.recCalls ? optText("recCalls", state.recCalls) : "—"},
-      {label:S.w036, value: state.hasConsult ? optText("hasConsult", state.hasConsult) : "—"}
+      {label:S.w032, value: state.recCalls ? optText("recCalls", state.recCalls) : "-"},
+      {label:S.w036, value: state.hasConsult ? optText("hasConsult", state.hasConsult) : "-"}
     ];
-    if(state.hasConsult==="yes" && state.consultTier>=0){ var tl = root.querySelector('input[name="consultTier"][value="'+state.consultTier+'"]'); inputs.push({label:S.w038, value: tl && tl.nextElementSibling ? tl.nextElementSibling.textContent.trim() : "—"}); }
-    inputs.push({label:S.w039, value: state.optimize ? optText("optimize", state.optimize) : "—"});
+    if(state.hasConsult==="yes" && state.consultTier>=0){ var tl = root.querySelector('input[name="consultTier"][value="'+state.consultTier+'"]'); inputs.push({label:S.w038, value: tl && tl.nextElementSibling ? tl.nextElementSibling.textContent.trim() : "-"}); }
+    inputs.push({label:S.w039, value: state.optimize ? optText("optimize", state.optimize) : "-"});
     inputs.push({label:S.w043, value:eur(r.appsM) + " " + S.w044.replace("€ ","")});
     inputs.push({label:S.w045, value: state.appsUnknown ? S.w046 : eur(r.appsRepIn) + " " + S.w044.replace("€ ","")});
     var assumptions = [

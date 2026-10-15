@@ -526,8 +526,10 @@ export default function HowStage({ toolIds, scene, getT, staticT, use3d, onFrame
             </span>
             <span className="inline-flex items-center gap-1.5 text-fg-muted"><i aria-hidden className="status-dot status-dot--brand" />Ejemplo</span>
           </div>
-          <div ref={(e) => { R.current.qBubble = e; }} className="ml-auto max-w-[92%] rounded-[12px] bg-accent-soft px-3.5 py-2.5 text-[13px] font-medium leading-snug text-fg sm:text-sm" style={{ minHeight: 40, opacity: 0 }}>
-            <span ref={(e) => { R.current.q = e; }} />
+          <div ref={(e) => { R.current.qBubble = e; }} className="ml-auto grid max-w-[92%] rounded-[12px] bg-accent-soft px-3.5 py-2.5 text-[13px] font-medium leading-snug text-fg sm:text-sm" style={{ minHeight: 40, opacity: 0 }}>
+            {/* Copias invisibles del texto entero: reservan su altura mientras se escribe, sin mover el panel */}
+            <span aria-hidden className="invisible [grid-area:1/1]">{QUESTION}|</span>
+            <span ref={(e) => { R.current.q = e; }} className="[grid-area:1/1]" />
           </div>
           <div ref={(e) => { R.current.dots = e; }} className="mt-3 flex gap-1.5 pl-1" style={{ opacity: 0, height: 10 }}>
             <span className="h-2 w-2 rounded-full bg-brand" />
@@ -535,8 +537,12 @@ export default function HowStage({ toolIds, scene, getT, staticT, use3d, onFrame
             <span className="h-2 w-2 rounded-full bg-brand" />
           </div>
           <div ref={(e) => { R.current.ansBox = e; }} className="relative mt-3 text-[13px] leading-snug text-fg-muted" style={{ opacity: 0, minHeight: compact ? 148 : 140 }}>
-            <p ref={set(R.current.ans, 0)} />
-            <p ref={set(R.current.ans, 1)} className="mt-2" />
+            {ANSWER.slice(0, 2).map((full, k) => (
+              <p key={k} className={`grid ${k ? "mt-2" : ""}`}>
+                <span aria-hidden className="invisible [grid-area:1/1]">{full}</span>
+                <span ref={set(R.current.ans, k)} className="[grid-area:1/1]" />
+              </p>
+            ))}
           </div>
           <div className={`mt-2.5 flex ${compact ? "flex-wrap gap-1.5" : "flex-col items-start gap-1.5"}`}>
             {CHIPS.map((c, k) => (

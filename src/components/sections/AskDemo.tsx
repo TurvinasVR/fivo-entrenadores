@@ -323,8 +323,10 @@ export default function AskDemo() {
           <div style={{ gridArea: "chat" }} className="min-h-[420px] p-4 sm:p-5" aria-live="polite">
             <p className="sr-only">{phase === "done" ? q.sr : "Escribiendo la respuesta de ejemplo."}</p>
             <div aria-hidden>
-              <div className="ml-auto min-h-[62px] max-w-[94%] rounded-[12px] bg-accent-soft text-fg px-4 py-2.5 text-[14px] font-medium leading-snug" style={{ opacity: phase === "idle" ? 0.4 : 1 }}>
-                <span ref={qRef}>{phase === "idle" ? ask.placeholder : reduced || !armed ? q.q : ""}</span>
+              <div className="ml-auto grid min-h-[62px] max-w-[94%] rounded-[12px] bg-accent-soft text-fg px-4 py-2.5 text-[14px] font-medium leading-snug" style={{ opacity: phase === "idle" ? 0.4 : 1 }}>
+                {/* Copia invisible de la pregunta entera: reserva su altura mientras se escribe, sin mover lo de debajo */}
+                <span className="invisible [grid-area:1/1]">{q.q}</span>
+                <span ref={qRef} className="[grid-area:1/1]">{phase === "idle" ? ask.placeholder : reduced || !armed ? q.q : ""}</span>
               </div>
 
               <div className="mt-3 flex h-6 items-center gap-2 pl-1 text-[13px] text-accent" style={{ opacity: searching ? 1 : 0, transition: "opacity 250ms" }}>

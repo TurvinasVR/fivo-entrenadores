@@ -196,13 +196,16 @@ export function ToolsScene() {
           )}
         </div>
 
-        {tools.after && (
-          <div className="mx-auto mt-2 max-w-[640px] text-center">
-            <p className="font-display text-xl font-bold leading-snug sm:text-2xl">{tools.after.main}</p>
-            <p className="mt-3 text-[14px] leading-snug text-fg-muted">{tools.after.small}</p>
-          </div>
-        )}
-        <BlockCta position="herramientas" />
+        {/* El anillo usa casi todo el ancho en móvil; el texto y el botón vuelven al margen de 20px del resto de bloques */}
+        <div className="px-3 sm:px-0">
+          {tools.after && (
+            <div className="mx-auto mt-2 max-w-[640px] text-center">
+              <p className="font-display text-xl font-bold leading-snug sm:text-2xl">{tools.after.main}</p>
+              <p className="mt-3 text-[14px] leading-snug text-fg-muted">{tools.after.small}</p>
+            </div>
+          )}
+          <BlockCta position="herramientas" />
+        </div>
       </div>
     </section>
   );

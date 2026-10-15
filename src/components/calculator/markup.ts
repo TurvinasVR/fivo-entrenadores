@@ -108,7 +108,7 @@ export const CALCULATOR_HTML = `<div id="page">
 </section>
 <aside aria-label="Resultado estimado" class="live" id="live">
 <p class="live-k">Beneficio neto estimado</p>
-<p class="live-n"><span class="live-num">— — — €</span><span class="live-per">al año</span></p>
+<p class="live-n"><span class="live-num">- - - €</span><span class="live-per">al año</span></p>
 <p class="live-status" id="liveStatus">Analizando tu sector…</p>
 <dl class="live-rows">
 <div><dt>Te ahorrarías</dt><dd></dd></div>
@@ -128,9 +128,9 @@ export const CALCULATOR_HTML = `<div id="page">
 <p class="net" id="net"><span aria-hidden="true" class="rv-ok"></span><span class="net-k" id="rcTail"></span><b class="net-n" id="rcEq"></b></p>
 <p class="rs-negnote" hidden="" id="rcNeg"></p>
 <div class="dual" id="dual">
-<div class="stat"><span class="dl" data-i18n="r002">Te ahorrarías</span><p class="big" id="saveBig">—</p><span class="dy" data-i18n="r004">al año</span></div>
-<div class="stat" id="earnBox"><span class="dl" data-i18n="r003">Ganarías más</span><p class="big" id="earnBig">—</p><span class="dy" data-i18n="r004">al año</span></div>
-<div class="stat" id="costBox"><span class="dl">Coste de Fivo al mes</span><p class="big" id="costBig">—</p><span class="dy" id="costYear"></span></div>
+<div class="stat"><span class="dl" data-i18n="r002">Te ahorrarías</span><p class="big" id="saveBig">-</p><span class="dy" data-i18n="r004">al año</span></div>
+<div class="stat" id="earnBox"><span class="dl" data-i18n="r003">Ganarías más</span><p class="big" id="earnBig">-</p><span class="dy" data-i18n="r004">al año</span></div>
+<div class="stat" id="costBox"><span class="dl">Coste de Fivo al mes</span><p class="big" id="costBig">-</p><span class="dy" id="costYear"></span></div>
 </div>
 <p class="sr-only"><span id="rcExpr"></span></p>
 <p class="rs-price" id="priceMsg"></p>

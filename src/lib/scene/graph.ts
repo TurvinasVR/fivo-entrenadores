@@ -54,7 +54,7 @@ export function projectHero(n: GNode) {
   return { x: 800 + n.x * s * 58, y: 450 + n.y * s * 58, s };
 }
 
-export type ToolId = "zoom" | "meet" | "outlook" | "gmail" | "drive" | "clickup" | "trello" | "jira" | "chatgpt" | "claude";
+export type ToolId = "gohighlevel" | "harbiz" | "zoom" | "meet" | "gmail" | "drive" | "chatgpt" | "claude";
 
 export type ToolNode = {
   id: ToolId;
@@ -70,31 +70,36 @@ export type ToolNode = {
 };
 
 const DEFS: Record<ToolId, Omit<ToolNode, "id" | "u" | "v" | "z">> = {
+  gohighlevel: { name: "GoHighLevel", file: "gohighlevel.svg", gives: "Leads, ventas y citas" },
+  harbiz: { name: "Harbiz", file: "harbiz.svg", gives: "Clientes y entrenamientos" },
   zoom: { name: "Zoom", file: "zoom.svg", gives: "Llamadas" },
   meet: { name: "Google Meet", file: "googlemeet.svg", gives: "Llamadas" },
-  outlook: { name: "Microsoft Outlook", file: "outlook.svg", gives: "Correo y calendario" },
   gmail: { name: "Gmail", file: "gmail.svg", gives: "Correo" },
   drive: { name: "Google Drive", file: "googledrive.svg", gives: "Documentos" },
-  clickup: { name: "ClickUp", file: "clickup.svg", gives: "Tareas" },
-  trello: { name: "Trello", file: "trello.svg", gives: "Tareas" },
-  jira: { name: "Jira", file: "jira.svg", gives: "Tareas" },
   chatgpt: { name: "ChatGPT", file: "openai.svg", gives: "Tu IA", mcp: true },
   claude: { name: "Claude", file: "claude.svg", gives: "Tu IA", mcp: true },
 };
 
+/**
+ * Lado de la caja del logotipo dentro de su disco de 48px. Los logotipos son marcas casi cuadradas en 24px;
+ * el de Harbiz es un logotipo de texto apaisado y necesita más ancho para verse del mismo tamaño.
+ */
+const LOGO_SCALE: Record<string, number> = { "harbiz.svg": 1.42 };
+export const logoBox = (file: string) => Math.round(24 * (LOGO_SCALE[file] ?? 1));
+
 /** Herramientas del grafo decorativo por defecto, en su orden en el anillo. */
-export const TOOL_IDS_DEFAULT: ToolId[] = ["zoom", "meet", "outlook", "gmail", "drive", "clickup", "trello", "jira", "chatgpt", "claude"];
+export const TOOL_IDS_DEFAULT: ToolId[] = ["gohighlevel", "harbiz", "zoom", "meet", "gmail", "drive", "chatgpt", "claude"];
 
 const toolCache = new Map<string, ToolNode[]>();
 
 /** Herramientas repartidas a partes iguales en el óvalo (con 9 son 40 grados, como siempre). */
-export function toolsFor(ids: readonly ToolId[]): ToolNode[] {
-  const key = ids.join(",");
+export function toolsFor(ids: readonly ToolId[], startDeg = 90): ToolNode[] {
+  const key = `${startDeg}:${ids.join(",")}`;
   const hit = toolCache.get(key);
   if (hit) return hit;
   const step = 360 / ids.length;
   const built = ids.map((id, i) => {
-    const a = ((90 + i * step) * Math.PI) / 180;
+    const a = ((startDeg + i * step) * Math.PI) / 180;
     return { id, ...DEFS[id], u: Math.cos(a) * 0.86, v: Math.sin(a) * 0.8, z: Math.sin(a * 2 + 0.6) * 1.3 };
   });
   toolCache.set(key, built);
@@ -102,6 +107,15 @@ export function toolsFor(ids: readonly ToolId[]): ToolNode[] {
 }
 
 export const TOOLS: ToolNode[] = toolsFor(TOOL_IDS_DEFAULT);
+
+/**
+ * Anillo de "Cómo funciona": el panel de la llamada y el chat ocupan el lado izquierdo del grafo. Si un nodo
+ * cae justo a 180 grados (con 8 herramientas, por ejemplo), el anillo gira medio paso para no pegarlo al panel.
+ */
+export function howToolsFor(ids: readonly ToolId[]): ToolNode[] {
+  const step = 360 / ids.length;
+  return toolsFor(ids, Number.isInteger(90 / step) ? 90 + step / 2 : 90);
+}
 
 /**
  * Reparto en anillo por longitud de arco (para el contenedor estrecho del móvil):

@@ -1,4 +1,4 @@
-import { toolsFor } from "@/lib/scene/graph";
+import { howToolsFor, logoBox } from "@/lib/scene/graph";
 import type { ToolId } from "@/lib/scene/graph";
 import type { HowScene } from "@/content/types";
 import { STATIC_T, callTileStart, computeState, makeLayout } from "@/lib/scene/how/model";
@@ -16,7 +16,7 @@ const Dot = ({ tone }: { tone: "win" | "lose" }) => <i aria-hidden className={`s
 export function HowPoster({ k, toolIds, scene, compact = false }: { k: 0 | 1 | 2; toolIds: ToolId[]; scene: HowScene; compact?: boolean }) {
   const { W, H } = compact ? SIZES.compact : SIZES.wide;
   const L = makeLayout(W, H);
-  const tools = toolsFor(toolIds);
+  const tools = howToolsFor(toolIds);
   const st = computeState(STATIC_T[k], 0, L, true, tools);
   const gs = st.hub.s;
   const stepOne = Math.min(1, Math.max(0, (gs - 0.8) / 0.2));
@@ -61,7 +61,7 @@ export function HowPoster({ k, toolIds, scene, compact = false }: { k: 0 | 1 | 2
           return (
             <g key={n.id} opacity={0.3 + 0.7 * n.lineP}>
               <circle cx={n.sx} cy={n.sy} r={24 * sc} fill="var(--color-fg)" />
-              <image href={`/logos/tools/${t.file}`} x={n.sx - 12 * sc} y={n.sy - 12 * sc} width={24 * sc} height={24 * sc} />
+              <image href={`/logos/tools/${t.file}`} x={n.sx - (logoBox(t.file) / 2) * sc} y={n.sy - (logoBox(t.file) / 2) * sc} width={logoBox(t.file) * sc} height={logoBox(t.file) * sc} />
               {stepOne > 0 && (
                 <text x={n.sx} y={n.sy + 24 * sc + 15} textAnchor="middle" fontSize="13" fill="var(--color-fg-muted)" opacity={stepOne * n.lineP}>
                   {t.name}

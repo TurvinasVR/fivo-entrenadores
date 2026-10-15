@@ -2,7 +2,7 @@
 
 import dynamic from "next/dynamic";
 import { useEffect, useMemo, useRef, useState } from "react";
-import { toolsFor } from "@/lib/scene/graph";
+import { howToolsFor, logoBox } from "@/lib/scene/graph";
 import type { ToolId } from "@/lib/scene/graph";
 import type { HowScene } from "@/content/types";
 import { bezier, callTileStart, computeState, makeLayout, SOURCES } from "@/lib/scene/how/model";
@@ -39,7 +39,7 @@ const dist = (el: HTMLElement | null, stage: HTMLElement) => {
 };
 
 export default function HowStage({ toolIds, scene, getT, staticT, use3d, onFrame }: Props) {
-  const TOOLS = useMemo(() => toolsFor(toolIds), [toolIds]);
+  const TOOLS = useMemo(() => howToolsFor(toolIds), [toolIds]);
   const NODE_COUNT = TOOLS.length + 5;
   const TRANSCRIPT = scene.transcript;
   const QUESTION = scene.question;
@@ -418,7 +418,7 @@ export default function HowStage({ toolIds, scene, getT, staticT, use3d, onFrame
         <div key={n.id} ref={set(R.current.chips, i)} className="how-chip absolute left-0 top-0" style={{ opacity: 0.3 }}>
           <div className="flex h-12 w-12 items-center justify-center rounded-full border border-transparent bg-fg [[data-on='1']_&]:border-accent">
             {/* eslint-disable-next-line @next/next/no-img-element */}
-            <img src={`/logos/tools/${n.file}`} alt="" width={24} height={24} className="h-6 w-6" />
+            <img src={`/logos/tools/${n.file}`} alt="" width={logoBox(n.file)} height={logoBox(n.file)} style={{ width: logoBox(n.file), height: logoBox(n.file) }} />
           </div>
           <span
             ref={set(R.current.labels, i)}

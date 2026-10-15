@@ -2,7 +2,7 @@
 
 import dynamic from "next/dynamic";
 import { useEffect, useMemo, useRef, useState } from "react";
-import { compactRing, toolsFor } from "@/lib/scene/graph";
+import { compactRing, logoBox, toolsFor } from "@/lib/scene/graph";
 import { useScene } from "@/lib/scene/store";
 import { DUR, EASE_CSS } from "@/lib/scene/motion";
 import { useLanding } from "../landing/LandingContext";
@@ -181,7 +181,7 @@ export function ToolsScene() {
                   }}
                 >
                   {/* eslint-disable-next-line @next/next/no-img-element */}
-                  <img src={`/logos/tools/${n.file}`} alt="" width={24} height={24} className="h-6 w-6" />
+                  <img src={`/logos/tools/${n.file}`} alt="" width={logoBox(n.file)} height={logoBox(n.file)} style={{ width: logoBox(n.file), height: logoBox(n.file) }} />
                 </button>
                 <span className="absolute left-1/2 top-full mt-1.5 w-max max-w-[92px] -translate-x-1/2 px-1 text-center text-[13px] leading-tight text-fg-muted">
                   {n.name}

@@ -4,6 +4,7 @@ import { useEffect, useMemo, useRef, useState } from "react";
 import type { LandingContent } from "@/content/types";
 import { useInView, useReducedMotion } from "@/lib/hooks";
 import { ComparePanel } from "./ComparePanel";
+import { logoBox } from "@/lib/scene/graph";
 import { useLanding } from "../landing/LandingContext";
 
 const EASE = "cubic-bezier(0.16,1,0.3,1)";
@@ -123,7 +124,7 @@ function Field({ problem, mode, active, instant = false, label }: { problem: Pro
             }}
           >
             {/* eslint-disable-next-line @next/next/no-img-element */}
-            <img src={`/logos/tools/${n.f}`} alt="" width={24} height={24} className="h-6 w-6" />
+            <img src={`/logos/tools/${n.f}`} alt="" width={logoBox(n.f)} height={logoBox(n.f)} style={{ width: logoBox(n.f), height: logoBox(n.f) }} />
           </span>
         );
       })}

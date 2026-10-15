@@ -39,7 +39,7 @@ export function Hero({ content }: { content: LandingContent }) {
 
         <h1
           id="titular"
-          className="mt-3 max-w-[1040px] font-display text-[clamp(1.5rem,1.1rem+2vw,2.75rem)] font-black leading-[1.1] tracking-[-0.015em] sm:mt-4"
+          className="mt-3 max-w-[820px] text-balance font-display text-[clamp(1.5rem,1.1rem+2vw,2.75rem)] font-black leading-[1.1] tracking-[-0.015em] sm:mt-4"
         >
           {hero.title}
         </h1>

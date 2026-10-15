@@ -1,5 +1,6 @@
 "use client";
 
+import { ChatCircleText } from "@phosphor-icons/react";
 import { useLanding } from "../landing/LandingContext";
 import { BlockCta } from "../landing/BlockCta";
 
@@ -18,7 +19,7 @@ export function TeamSection() {
             {team.title}
           </h2>
           <span className="inline-flex items-center gap-1.5 text-[12.5px] text-fg-muted">
-            <i aria-hidden className="status-dot status-dot--brand" />
+            <i aria-hidden className="status-dot text-accent" />
             Preguntas de ejemplo
           </span>
         </div>
@@ -31,16 +32,19 @@ export function TeamSection() {
               key={r.role}
               className="relative grid grid-cols-[44px_minmax(0,1fr)] gap-x-4 gap-y-3 border-t border-line py-6 first:border-t-0 md:grid-cols-[44px_minmax(0,1fr)_minmax(0,0.9fr)] md:items-center md:gap-x-8"
             >
-              <span aria-hidden className="relative z-[1] flex h-11 w-11 items-center justify-center rounded-full bg-brand font-sans text-[15px] font-bold text-bg ring-4 ring-bg">
+              <span aria-hidden className="relative z-[1] flex h-11 w-11 items-center justify-center rounded-full bg-accent font-sans text-[15px] font-bold text-bg ring-4 ring-bg">
                 {r.initial}
               </span>
               <div>
                 <h3 className="font-display text-lg font-bold leading-snug sm:text-xl">{r.role}</h3>
                 <p className="mt-1 max-w-[440px] text-[15px] leading-snug text-fg-muted sm:text-base">{r.gives}</p>
               </div>
-              <p className="col-start-2 w-fit max-w-full rounded-[12px] bg-accent-soft px-4 py-3 text-[15px] font-medium leading-snug text-fg md:col-start-auto md:justify-self-end">
-                <span className="sr-only">Ejemplo de pregunta: </span>
-                {r.example}
+              <p className="col-start-2 flex items-start gap-2.5 text-[15px] font-medium leading-snug text-fg sm:text-base md:col-start-auto">
+                <ChatCircleText size={20} aria-hidden className="mt-px shrink-0 text-accent" />
+                <span>
+                  <span className="sr-only">Ejemplo de pregunta: </span>
+                  {r.example}
+                </span>
               </p>
             </li>
           ))}

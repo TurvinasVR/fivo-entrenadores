@@ -51,18 +51,18 @@ function Detail({ item, wide }: { item: Item; wide: boolean }) {
         <ul className="mt-2">
           {item.data?.map((d) => (
             <li key={d} className="flex items-start gap-3 border-t border-line py-2.5 text-[15px] leading-snug text-fg first:border-t-0">
-              <i aria-hidden className="status-dot status-dot--brand mt-[8px]" />
+              <i aria-hidden className="status-dot mt-[8px] text-accent" />
               {d}
             </li>
           ))}
         </ul>
       </div>
       {item.question && (
-        <div className={wide ? "flex flex-col justify-center border-l border-line p-7 lg:p-8" : ""}>
+        <div className={wide ? "border-l border-line p-7 lg:p-8" : ""}>
           <p className="flex items-center justify-between text-[12.5px] font-medium text-fg-muted">
             Puedes preguntarle
             <span className="inline-flex items-center gap-1.5">
-              <i aria-hidden className="status-dot status-dot--brand" />
+              <i aria-hidden className="status-dot text-accent" />
               Ejemplo
             </span>
           </p>
@@ -119,7 +119,7 @@ export function SourcesSection() {
                 onClick={() => setSel(i)}
                 onKeyDown={(e) => onKey(e, i)}
                 className={`flex min-h-[52px] cursor-pointer items-center gap-2 rounded-[8px] border px-3 text-[15px] font-semibold transition-colors duration-200 ${
-                  sel === i ? "sel-brand text-fg" : "hover-ring-brand border-line bg-surface text-fg-muted hover:text-fg"
+                  sel === i ? "border-accent bg-accent-soft text-fg" : "border-line bg-surface text-fg-muted hover:border-line-strong hover:text-fg"
                 }`}
               >
                 <Stack item={it} max={2} />

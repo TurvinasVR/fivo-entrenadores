@@ -35,7 +35,7 @@ export function AiSection() {
             <div className="flex items-center justify-between border-b border-line px-5 py-3 text-[12.5px] text-fg-muted">
               <span>Lo que le pides a tu IA</span>
               <span className="inline-flex items-center gap-1.5">
-                <i aria-hidden className="status-dot status-dot--brand" />
+                <i aria-hidden className="status-dot text-accent" />
                 Ejemplo
               </span>
             </div>

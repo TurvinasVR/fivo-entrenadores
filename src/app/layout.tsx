@@ -24,9 +24,9 @@ const satoshi = localFont({
     { path: "./fonts/satoshi-900.woff2", weight: "900", style: "normal" },
   ],
   display: "swap",
-  // Sin precarga: el titular se pinta con la fuente de repuesto (ajustada, sin salto) y la sustituye al llegar.
-  // Así los 48 KB de las dos caras no compiten con el póster y el JavaScript de la primera pantalla.
-  preload: false,
+  // Con precarga: el titular corto del hero cambiaba de ancho al sustituir la fuente de repuesto (CLS). Precargada,
+  // llega antes de pintar: CLS 0 y LCP algo mejor que sin precarga (medido en local, móvil con CPU x4, 9 pasadas).
+  preload: true,
   variable: "--font-satoshi",
 });
 

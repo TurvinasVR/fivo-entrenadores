@@ -1,6 +1,6 @@
-# Landing de Fivo para infoproductores
+# Landing de Fivo para entrenadores personales
 
-Landing estática (Next.js) publicada en https://infoproductores.fivo.info.
+Landing estática (Next.js) publicada en https://entrenadores.fivo.info.
 
 ## Compilar
 

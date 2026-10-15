@@ -7,6 +7,7 @@ import { useScene } from "@/lib/scene/store";
 import { DUR, EASE_CSS } from "@/lib/scene/motion";
 import { useLanding } from "../landing/LandingContext";
 import { BlockCta } from "../landing/BlockCta";
+import { SourcesDetail, sourceIndexOf } from "../sections/SourcesSection";
 
 const ToolsView3D = dynamic(() => import("./ToolsView3D"), { ssr: false });
 
@@ -17,7 +18,7 @@ const ToolsView3D = dynamic(() => import("./ToolsView3D"), { ssr: false });
  * modestos y sin WebGL; con movimiento reducido, el estado final fijo.
  */
 export function ToolsScene() {
-  const { tools } = useLanding();
+  const { tools, sources } = useLanding();
   const TOOLS = useMemo(() => toolsFor(tools.ids), [tools.ids]);
   const COMPACT = useMemo(() => compactRing(TOOLS.length), [TOOLS.length]);
   const { plan, canvas } = useScene();
@@ -33,6 +34,24 @@ export function ToolsScene() {
   const setLit = (i: number) => {
     litRef.current = i;
     setLitState(i);
+  };
+
+  // "Qué entra en el grafo": el grupo elegido (pestañas en escritorio) y el abierto (acordeón en móvil)
+  const [sel, setSel] = useState(0);
+  const [open, setOpen] = useState(0);
+  const groupOf = useMemo(() => TOOLS.map((t) => sourceIndexOf(sources.items, t.id)), [TOOLS, sources.items]);
+
+  /** Pulsar una herramienta del anillo abre su detalle debajo y lo trae a la vista si no se ve. */
+  const showSource = (i: number) => {
+    const g = groupOf[i];
+    if (g < 0) return;
+    setSel(g);
+    setOpen(g);
+    const mobile = window.matchMedia("(max-width: 639px)").matches;
+    const target = document.getElementById(mobile ? `fuente-item-${sources.items[g].id}` : "que-entra");
+    const smooth = !window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    // En móvil se espera a que el acordeón cierre el grupo anterior (300 ms) para no quedarse corto ni pasarse
+    window.setTimeout(() => target?.scrollIntoView({ behavior: smooth ? "smooth" : "auto", block: mobile ? "start" : "nearest" }), mobile ? 320 : 0);
   };
 
   useEffect(() => {
@@ -146,6 +165,7 @@ export function ToolsScene() {
           {/* Herramientas */}
           {TOOLS.map((n, i) => {
             const on = lit === i;
+            const chosen = groupOf[i] >= 0 && groupOf[i] === sel;
             const style: React.CSSProperties = is3d
               ? { left: 0, top: 0 }
               : ({ ...pos(i), transform: "translate(-50%,-50%)" } as React.CSSProperties);
@@ -167,16 +187,19 @@ export function ToolsScene() {
                 </span>
                 <button
                   type="button"
-                  aria-label={`${n.name}${n.mcp ? ", vía MCP" : ""}. Aporta: ${n.gives}`}
-                  aria-pressed={on}
+                  aria-label={`${n.name}${n.mcp ? ", vía MCP" : ""}. Aporta: ${n.gives}. Ver qué lee Fivo`}
+                  aria-controls="que-entra"
                   onPointerEnter={() => setLit(i)}
                   onFocus={() => setLit(i)}
                   onBlur={() => setLit(-1)}
-                  onClick={() => setLit(on ? -1 : i)}
-                  className="flex h-12 w-12 cursor-pointer items-center justify-center rounded-full border bg-fg"
+                  onClick={() => {
+                    setLit(i);
+                    showSource(i);
+                  }}
+                  className="flex h-12 w-12 cursor-pointer items-center justify-center rounded-full border-2 bg-fg"
                   style={{
-                    borderColor: on ? "var(--color-accent)" : "transparent",
-                    boxShadow: on ? "0 0 0 4px var(--color-accent-soft)" : "none",
+                    borderColor: on || chosen ? "var(--color-accent)" : "transparent",
+                    boxShadow: on || chosen ? "0 0 0 4px var(--color-accent-soft)" : "none",
                     transition: `border-color ${DUR.micro}ms ${EASE_CSS}, box-shadow ${DUR.micro}ms ${EASE_CSS}`,
                   }}
                 >
@@ -204,6 +227,7 @@ export function ToolsScene() {
               {tools.after.small && <p className="mt-3 text-[14px] leading-snug text-fg-muted">{tools.after.small}</p>}
             </div>
           )}
+          <SourcesDetail sources={sources} sel={sel} onSelect={setSel} open={open} onOpen={setOpen} />
           <BlockCta position="herramientas" />
         </div>
       </div>

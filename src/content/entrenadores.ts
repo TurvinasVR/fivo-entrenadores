@@ -36,6 +36,7 @@ export const entrenadores: LandingContent = {
   tools: {
     ids: ["gohighlevel", "harbiz", "zoom", "meet", "stripe", "gmail", "notion", "slack", "chatgpt", "claude"],
     title: "Se conecta a todo lo que usa tu equipo",
+    intro: "Pulsa una herramienta para ver qué lee Fivo.",
     srList:
       "GoHighLevel, Harbiz, Zoom, Google Meet, Stripe, Gmail, Notion y Slack, y ChatGPT y Claude vía MCP.",
     after: {
@@ -100,6 +101,12 @@ export const entrenadores: LandingContent = {
         tools: ["stripe"],
         data: ["Cobros", "Suscripciones", "Impagos"],
         question: "¿Qué clientes tienen un pago fallido y siguen entrenando?",
+      },
+      {
+        id: "ia",
+        name: "Tu IA",
+        tools: ["claude", "chatgpt", "gemini"],
+        note: "Claude, ChatGPT y Gemini consultan todo esto por MCP, sin copiar y pegar nada.",
       },
       {
         id: "resto",

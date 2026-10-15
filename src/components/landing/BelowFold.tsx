@@ -8,7 +8,6 @@ import { HowItWorks } from "../HowItWorks";
 import { ToolsScene } from "../scene/ToolsScene";
 import { ProblemSection } from "../sections/ProblemSection";
 import { AskSection } from "../sections/AskSection";
-import { SourcesSection } from "../sections/SourcesSection";
 import { AiSection } from "../sections/AiSection";
 import { TeamSection } from "../sections/TeamSection";
 import Reviews from "../reviews/Reviews";
@@ -25,9 +24,8 @@ export default function BelowFold() {
           <Reviews headingLevel={2} className="" />
         </div>
         <ProblemSection />
-        <SourcesSection />
-        <ToolsScene />
         <TeamSection />
+        <ToolsScene />
         <HowItWorks />
         <AskSection />
         <AiSection />

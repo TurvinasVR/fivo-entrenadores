@@ -14,6 +14,10 @@ export function Landing({ content }: { content: LandingContent }) {
       <SceneRoot />
       {/* La barra fija va fuera de la capa de contenido para quedar por encima de todo (y bajo las cookies) */}
       <TopBar />
+      {/* Chrome no pinta hasta haber leído el HTML hasta #hero-end: sin esto, con una CPU lenta pinta la primera pantalla a
+          medias (un logotipo solo en el centro, un botón con medio texto) y los elementos centrados saltan al llegar el
+          resto (CLS). React sube este <link> al <head>; los navegadores que no lo conocen lo ignoran. */}
+      <link rel="expect" href="#hero-end" blocking="render" />
       <div className="relative">
         <HeroBackdrop />
         <div className="relative z-[2]">
@@ -21,6 +25,7 @@ export function Landing({ content }: { content: LandingContent }) {
           <Hero content={content} />
         </div>
       </div>
+      <div id="hero-end" aria-hidden />
       {/* Todo lo de debajo va en el HTML inicial, con cada escena ya pintada en su estado final */}
       <LandingProvider content={content}>
         <BelowFold />

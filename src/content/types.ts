@@ -132,10 +132,22 @@ export type LandingContent = {
     status: string;
   };
 
-  /** "Cada persona de tu equipo": qué le da Fivo a cada rol y una pregunta de ejemplo. */
+  /**
+   * El equipo como cadena: cada parada recibe el contexto de la anterior. `handoff` es lo que pasa desde la
+   * parada anterior (la etiqueta sobre la línea); `receives` falta en la primera.
+   */
   team: {
     title: string;
-    roles: { initial: string; role: string; gives: string; example: string }[];
+    roles: {
+      id: string;
+      role: string;
+      handoff?: string;
+      receives?: string;
+      stops: string;
+      q: string;
+      a: string;
+      sources: { label: string; tool?: ToolId }[];
+    }[];
     footer: string;
   };
 

@@ -23,6 +23,9 @@ export const CLIENTS = [
   { name: "Xunta de Galicia, SERGAS", file: "xunta_de_galicia_sergas_cor.webp", w: 480, h: 196, height: 36 },
 ];
 
+/** Píxel transparente: la imagen tiene fuente desde el principio, así que al llegar el logotipo real no cambia de estado ni de caja. */
+const BLANK = "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7";
+
 export function ClientLogos() {
   const [ready, setReady] = useState(false);
   useEffect(() => {
@@ -42,10 +45,10 @@ export function ClientLogos() {
     >
       {CLIENTS.map((c) => (
         <li key={c.name} className="flex items-center">
-          {/* block: sin línea base, la caja no se mueve 1px al llegar la imagen (CLS 0) */}
+          {/* block y fuente desde el principio (píxel transparente): la caja no se mueve al llegar la imagen (CLS 0) */}
           {/* eslint-disable-next-line @next/next/no-img-element */}
           <img
-            src={ready ? `/logos/clients/${c.file}` : undefined}
+            src={ready ? `/logos/clients/${c.file}` : BLANK}
             alt={c.name}
             width={c.w}
             height={c.h}

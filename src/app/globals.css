@@ -470,3 +470,14 @@ html[data-brand-icons] .icon-brand { fill: url(#fivo-grad); }
   .cx[data-cx] .cx-edge { stroke-dashoffset: 0; transition: none; }
   .cx .cx-dot { display: none; }
 }
+
+/* Equipo como cadena (TeamSection, escritorio): al llegar a un rol, primero "Recibe" (como si llegara del rol
+   anterior) y después la respuesta. Opacidad y un desplazamiento pequeño; sin animación con movimiento reducido. */
+@media (prefers-reduced-motion: no-preference) {
+  .team-panel.is-on .team-recv { animation: team-in 200ms var(--ease-out-expo) both; }
+  .team-panel.is-on .team-ans { animation: team-in 200ms var(--ease-out-expo) 200ms both; }
+}
+@keyframes team-in {
+  from { opacity: 0; transform: translateY(8px); }
+  to { opacity: 1; transform: none; }
+}

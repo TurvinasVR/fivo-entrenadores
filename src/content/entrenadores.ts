@@ -14,6 +14,7 @@ export const entrenadores: LandingContent = {
   repeatCta: true,
   ctaLines: {
     herramientas: "¿Ya usas GoHighLevel y Harbiz? Te enseñamos cómo quedaría todo conectado.",
+    equipo: "Te enseñamos cómo lo usaría cada persona de tu equipo.",
     ia: "¿Usas Claude o ChatGPT? En la llamada te enseñamos cómo quedaría con tu negocio.",
     problema: "Así se ve con Fivo. En la llamada lo vemos con tu negocio.",
     "como-funciona": "Te lo enseñamos con un negocio como el tuyo en **30 minutos**.",
@@ -108,6 +109,33 @@ export const entrenadores: LandingContent = {
       },
     ],
     footer: "No cambias ninguna herramienta. Tu equipo sigue trabajando igual.",
+  },
+
+  team: {
+    title: "Cada persona de tu equipo, con lo que necesita",
+    roles: [
+      { initial: "T", role: "Tú", gives: "Sabes cómo va todo sin preguntar a nadie.", example: "¿Cómo ha ido la semana en ventas y en renovaciones?" },
+      { initial: "S", role: "Setters", gives: "Saben qué leads tocar primero y con qué mensaje.", example: "¿Qué leads de ayer no han tenido respuesta?" },
+      {
+        initial: "C",
+        role: "Closers",
+        gives: "Llegan a cada llamada sabiendo lo que quiere el lead, y aprenden de las llamadas que cierran.",
+        example: "Prepárame la llamada de las 17:00.",
+      },
+      {
+        initial: "C",
+        role: "Coaches",
+        gives: "Saben lo que se le prometió a cada cliente en la venta y cómo va desde entonces.",
+        example: "Resúmeme a Marta antes de su check-in.",
+      },
+      {
+        initial: "N",
+        role: "Nutricionista y atención al cliente",
+        gives: "Tienen el historial de cada cliente sin pedirlo.",
+        example: "¿Qué le pasó a Javier con la pauta de la semana pasada?",
+      },
+    ],
+    footer: "Tú decides quién ve qué, con permisos por persona y por equipo.",
   },
 
   ai: {

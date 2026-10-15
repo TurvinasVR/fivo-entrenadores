@@ -116,6 +116,13 @@ export type LandingContent = {
     footer: string;
   };
 
+  /** "Cada persona de tu equipo": qué le da Fivo a cada rol y una pregunta de ejemplo. */
+  team: {
+    title: string;
+    roles: { initial: string; role: string; gives: string; example: string }[];
+    footer: string;
+  };
+
   /** "Tu IA ya conoce tu negocio": Fivo por MCP dentro de Claude, ChatGPT y Gemini. */
   ai: {
     title: string;

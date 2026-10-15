@@ -10,6 +10,7 @@ import { ProblemSection } from "../sections/ProblemSection";
 import { AskSection } from "../sections/AskSection";
 import { SourcesSection } from "../sections/SourcesSection";
 import { AiSection } from "../sections/AiSection";
+import { TeamSection } from "../sections/TeamSection";
 import Reviews from "../reviews/Reviews";
 import { useLanding } from "./LandingContext";
 
@@ -26,6 +27,7 @@ export default function BelowFold() {
         <ProblemSection />
         <SourcesSection />
         <ToolsScene />
+        <TeamSection />
         <HowItWorks />
         <AskSection />
         <AiSection />

@@ -1,0 +1,453 @@
+@import "tailwindcss";
+
+/* Sistema de diseño de Fivo (ver DESIGN.md). Un solo tema: oscuro, bloqueado.
+   Todo color sale de aquí. Las escenas WebGL leen los mismos valores de src/lib/scene/tokens.ts. */
+@theme {
+  --color-bg: #08090b;
+  --color-surface: #111215;
+  --color-surface-2: #17181c;
+  --color-fg: #f4f4f6;
+  --color-fg-muted: #a1a1b0;
+  --color-fg-subtle: #74748a;
+  --color-line: #24252b;
+  --color-line-strong: #32333b;
+  --color-accent: #6b86ff;
+  --color-accent-soft: rgb(107 134 255 / 0.14);
+  --color-danger: #f2666a;
+  --color-success: #3dd68c;
+  --color-glass: rgb(21 23 29 / 0.88);
+  --color-glass-soft: rgb(17 19 25 / 0.38);
+  /* Degradado de marca: solo el botón "Agendar mi llamada" */
+  --color-grad-a: #5271ff;
+  --color-grad-b: #00c9ff;
+  /* Aviso "Calendario de ejemplo" */
+  --color-warn: #e8a838;
+
+  --font-display: var(--font-satoshi), "Arial", sans-serif;
+  --font-sans: var(--font-manrope), system-ui, sans-serif;
+
+  --radius-chip: 6px;
+  --radius-field: 8px;
+  --radius-card: 12px;
+  --radius-dialog: 16px;
+
+  --ease-out-expo: cubic-bezier(0.16, 1, 0.3, 1);
+
+  /* Resplandor del botón principal */
+  /* Resplandor bajo el botón y halo suave del degradado a cada lado (azul a la izquierda, cian a la derecha) */
+  --shadow-primary: 0 8px 24px rgb(82 113 255 / 0.42), -12px 6px 30px -10px rgb(82 113 255 / 0.5), 12px 6px 30px -10px rgb(0 201 255 / 0.4);
+  --shadow-primary-hover: 0 12px 34px rgb(82 113 255 / 0.62), -14px 8px 34px -10px rgb(82 113 255 / 0.65), 14px 8px 34px -10px rgb(0 201 255 / 0.55);
+}
+
+/* Escala de capas (z-index) */
+:root {
+  --z-bar: 40;
+  --z-sticky: 50;
+  --z-consent: 60;
+  color-scheme: dark;
+}
+
+html {
+  background: var(--color-bg);
+  -webkit-text-size-adjust: 100%;
+  scroll-padding-top: 16px;
+}
+html {
+  scroll-padding-top: 72px; /* la barra superior es fija */
+}
+@media (prefers-reduced-motion: no-preference) {
+  html {
+    scroll-behavior: smooth;
+  }
+}
+
+body {
+  background-color: var(--color-bg);
+  /* Trama de puntos apenas visible */
+  background-image: radial-gradient(color-mix(in srgb, var(--color-fg) 5%, transparent) 1px, transparent 1px);
+  background-size: 28px 28px;
+  color: var(--color-fg);
+  font-family: var(--font-sans);
+  font-size: 16px;
+  line-height: 1.625;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+  caret-color: var(--color-accent);
+}
+
+::selection {
+  background: var(--color-accent-soft);
+  color: var(--color-fg);
+}
+:focus-visible {
+  outline: 2px solid var(--color-accent);
+  outline-offset: 3px;
+  border-radius: var(--radius-chip);
+}
+* {
+  scrollbar-width: thin;
+  scrollbar-color: var(--color-line-strong) var(--color-bg);
+}
+::placeholder {
+  color: var(--color-fg-subtle);
+  opacity: 1;
+}
+a {
+  text-underline-offset: 3px;
+}
+
+h1,
+h2,
+h3 {
+  font-family: var(--font-display);
+  text-wrap: balance;
+}
+
+/* Botón principal ("Agendar mi llamada" en toda la página): siempre con el degradado de marca. 52px; 44px en la barra superior.
+   Texto en bg (#08090B) sobre el degradado: 4,9:1 en el extremo azul y más de 10:1 en el cian. */
+.btn-cta {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.75rem;
+  min-height: 52px;
+  padding: 0 2rem;
+  border-radius: var(--radius-field);
+  background: linear-gradient(90deg, var(--color-grad-a), var(--color-grad-b));
+  box-shadow: var(--shadow-primary);
+  color: var(--color-bg);
+  font-family: var(--font-sans);
+  font-weight: 700;
+  font-size: 1.0625rem;
+  letter-spacing: -0.005em;
+  line-height: 1;
+  white-space: nowrap;
+  cursor: pointer;
+  border: 0;
+  text-decoration: none;
+  transition:
+    transform 0.2s var(--ease-out-expo),
+    filter 0.15s,
+    box-shadow 0.3s;
+}
+.btn-cta:hover {
+  transform: translateY(-2px);
+  filter: brightness(1.06);
+  box-shadow: var(--shadow-primary-hover);
+}
+.btn-cta:active {
+  transform: translateY(0) scale(0.98);
+}
+.btn-cta:focus-visible {
+  outline: 2px solid var(--color-accent);
+  outline-offset: 4px;
+}
+.btn-cta:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+  box-shadow: none;
+  filter: none;
+  transform: none;
+}
+.btn-cta--sm {
+  min-height: 44px;
+  padding: 0 1.125rem;
+  font-size: 0.875rem;
+  font-weight: 600;
+}
+.btn-cta--lg {
+  min-height: 52px;
+}
+.btn-cta--xl {
+  min-height: 56px;
+  padding: 0 2.25rem;
+}
+
+/* Brillo de entrada: un reflejo cruza el botón una sola vez de izquierda a derecha cuando aparece en pantalla */
+.btn-cta::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  pointer-events: none;
+  background: linear-gradient(105deg, transparent 38%, rgb(255 255 255 / 0.55) 50%, transparent 62%);
+  background-size: 260% 100%;
+  background-position: 170% 0;
+  background-repeat: no-repeat;
+  opacity: 0;
+}
+@keyframes cta-sheen {
+  0% { opacity: 1; background-position: 170% 0; }
+  100% { opacity: 1; background-position: -70% 0; }
+}
+.btn-cta[data-sheen]::after {
+  animation: cta-sheen 1100ms var(--ease-out-expo) 300ms 1 both;
+}
+.btn-cta--sm::after {
+  display: none;
+}
+
+/* La flecha del botón se adelanta unos píxeles hacia la derecha al pasar el ratón */
+.cta-arrow {
+  display: inline-flex;
+  transition: transform 0.25s var(--ease-out-expo);
+}
+a:hover > .cta-arrow[data-dir="right"],
+button:hover > .cta-arrow[data-dir="right"] {
+  transform: translateX(3px);
+}
+
+/* Realce único cuando el vídeo llega a la llamada a la acción: el resplandor sube y baja, sin moverse */
+@keyframes cta-pulse {
+  0%, 100% { box-shadow: var(--shadow-primary); }
+  50% { box-shadow: 0 8px 36px rgb(82 113 255 / 0.75); }
+}
+.btn-cta[data-pulse] {
+  animation: cta-pulse 1.6s var(--ease-out-expo) 1;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .btn-cta:hover,
+  .btn-cta:active {
+    transform: none;
+  }
+  .btn-cta::after {
+    display: none;
+  }
+  a:hover > .cta-arrow,
+  button:hover > .cta-arrow {
+    transform: none !important;
+  }
+  .btn-cta[data-pulse] {
+    animation: none;
+  }
+}
+
+/* Línea de apoyo bajo cada botón principal */
+.cta-hint {
+  font-size: 13px;
+  line-height: 1.4;
+  color: var(--color-fg-muted);
+}
+
+/* Escena de herramientas: dos disposiciones (ancha y compacta) elegidas por CSS, para que el HTML del servidor
+   ya traiga cada logotipo en su sitio y no haya salto al cargar el JavaScript. Compacta = menos de 680px. */
+.tool-chip {
+  left: var(--lf);
+  top: var(--tf);
+}
+.tool-ring {
+  width: var(--w);
+  height: var(--h);
+}
+.tool-lines--compact {
+  display: none;
+}
+@media (max-width: 679px) {
+  .tool-chip {
+    left: var(--lc);
+    top: var(--tc);
+  }
+  .tool-ring {
+    width: var(--wc);
+    height: var(--hc);
+  }
+  .tool-lines--full {
+    display: none;
+  }
+  .tool-lines--compact {
+    display: block;
+  }
+}
+
+/* Barra superior fija: sin fondo en lo alto; al hacer scroll, bg al 85 % con desenfoque y borde inferior de 1px.
+   Sin soporte de backdrop-filter, bg sólido. */
+.topbar {
+  background-color: transparent;
+  border-bottom: 1px solid transparent;
+  transition:
+    background-color 0.3s var(--ease-out-expo),
+    border-color 0.3s var(--ease-out-expo),
+    backdrop-filter 0.3s var(--ease-out-expo),
+    -webkit-backdrop-filter 0.3s var(--ease-out-expo);
+}
+.topbar[data-scrolled] {
+  background-color: var(--color-bg);
+  border-bottom-color: var(--color-line);
+}
+@supports (backdrop-filter: blur(1px)) or (-webkit-backdrop-filter: blur(1px)) {
+  .topbar[data-scrolled] {
+    background-color: color-mix(in srgb, var(--color-bg) 85%, transparent);
+    -webkit-backdrop-filter: blur(12px);
+    backdrop-filter: blur(12px);
+  }
+}
+
+/* Botón secundario: borde line, texto fg */
+.btn-ghost {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  min-height: 44px;
+  padding: 0 1.125rem;
+  border-radius: var(--radius-field);
+  border: 1px solid var(--color-line);
+  color: var(--color-fg);
+  background: transparent;
+  font-weight: 500;
+  font-size: 0.875rem;
+  white-space: nowrap;
+  cursor: pointer;
+  text-decoration: none;
+  transition:
+    background-color 0.15s,
+    border-color 0.15s,
+    transform 0.15s var(--ease-out-expo);
+}
+.btn-ghost:hover {
+  background: var(--color-surface-2);
+  border-color: var(--color-line-strong);
+}
+.btn-ghost:active {
+  transform: scale(0.98);
+}
+
+/* Tarjeta: plana, borde de 1px en line como canto, sin sombra */
+.card {
+  background: var(--color-surface);
+  border: 1px solid var(--color-line);
+  border-radius: var(--radius-card);
+}
+
+/* Logos de clientes: blancos monocromos sobre oscuro (las herramientas llevan su color real) */
+.logo-mono {
+  filter: brightness(0) invert(1);
+}
+
+/* Tablas solo para lectores de pantalla: sin salto de línea forzado, para que no ensanchen la página en móvil */
+table.sr-only {
+  white-space: normal;
+}
+
+/* Mientras el aviso de cookies está abierto, el botón fijo de móvil se oculta para no solaparse con él */
+html[data-consent-open] .sticky-cta {
+  display: none;
+}
+
+/* Estado: punto de 6px y una palabra, nunca una placa de color */
+.status-dot {
+  display: inline-block;
+  width: 6px;
+  height: 6px;
+  border-radius: 9999px;
+  background: currentColor;
+  flex: none;
+}
+
+/* Acordeón sin saltos: grid 0fr a 1fr */
+.acc-panel {
+  display: grid;
+  grid-template-rows: 0fr;
+  transition: grid-template-rows 0.3s var(--ease-out-expo);
+}
+.acc-panel[data-open="true"] {
+  grid-template-rows: 1fr;
+}
+.acc-panel > div {
+  overflow: hidden;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.001ms !important;
+    transition-duration: 0.001ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+/* Vídeo del hero: grande y centrado en escritorio, ajustado a la altura para que quepa sin scroll */
+.hero-video {
+  max-width: 100%;
+}
+@media (min-width: 1024px) {
+  .hero-video {
+    width: min(760px, max(440px, calc((100dvh - 505px) * 16 / 9)));
+  }
+}
+
+/* ---- Escenas y formulario ---- */
+html[data-hero3d] .hero-graph-svg {
+  opacity: 0;
+}
+.hero-graph-svg {
+  transition: opacity 600ms var(--ease-out-expo);
+  animation: fade-in 800ms var(--ease-out-expo) both;
+}
+@keyframes fade-in {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+@keyframes ask-dot {
+  0%, 100% { transform: translateY(0); opacity: 0.5; }
+  50% { transform: translateY(-3px); opacity: 1; }
+}
+@keyframes pane-in {
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: none; }
+}
+.pane-in { animation: pane-in 450ms var(--ease-out-expo) both; }
+
+.ask-grid { display: grid; grid-template-areas: "graph" "chat" "src"; }
+@media (min-width: 640px) {
+  .ask-grid { grid-template-columns: 1fr 250px; grid-template-areas: "chat graph" "chat src"; grid-template-rows: auto 1fr; }
+}
+
+/* Los subtítulos del VSL se pintan en el componente; la caja nativa del navegador se oculta. */
+video::-webkit-media-text-track-container {
+  display: none !important;
+}
+
+/* /gracias: el botón del calendario solo existe si hay fecha (la marca el script de ThanksPage antes de pintar) */
+.cal-slot { display: none; }
+html[data-booking] .cal-slot { display: inline-block; }
+
+/* Branding: degradado de marca (brand-start a brand-end) en los elementos destacados: pasos, números, seleccionados,
+   puntos, iconos y barras. El texto de los enlaces se queda en accent: con degradado se lee peor. */
+:root {
+  --brand-90: linear-gradient(90deg, var(--color-grad-a), var(--color-grad-b));
+  --brand-135: linear-gradient(135deg, var(--color-grad-a), var(--color-grad-b));
+  --brand-180: linear-gradient(180deg, var(--color-grad-a), var(--color-grad-b));
+}
+.bg-brand { background-image: var(--brand-135); }
+.bg-brand-x { background-image: var(--brand-90); }
+.bg-brand-y { background-image: var(--brand-180); }
+.status-dot.status-dot--brand { background: var(--brand-135); }
+/* Borde de 1,5px en degradado con el relleno que se indique en --inner (por defecto, bg) */
+.ring-brand {
+  border: 1.5px solid transparent;
+  background:
+    linear-gradient(var(--inner, var(--color-bg)), var(--inner, var(--color-bg))) padding-box,
+    var(--brand-135) border-box;
+}
+/* Elegido: borde en degradado y fondo accent-soft */
+.sel-brand {
+  border-color: transparent;
+  background:
+    linear-gradient(var(--color-accent-soft), var(--color-accent-soft)) padding-box,
+    linear-gradient(var(--color-surface), var(--color-surface)) padding-box,
+    var(--brand-135) border-box;
+}
+/* Al pasar el ratón: borde en degradado */
+.hover-ring-brand:hover:not(:disabled) {
+  border-color: transparent;
+  background:
+    linear-gradient(var(--color-surface-2), var(--color-surface-2)) padding-box,
+    var(--brand-135) border-box;
+}
+/* Iconos con el degradado (el <linearGradient id="fivo-grad"> está en el layout). Se activa tras la carga: ver BrandIcons */
+.icon-brand { fill: var(--color-accent); }
+html[data-brand-icons] .icon-brand { fill: url(#fivo-grad); }

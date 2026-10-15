@@ -59,18 +59,10 @@ export type ToolId =
   | "harbiz"
   | "zoom"
   | "meet"
-  | "teams"
   | "stripe"
   | "gmail"
-  | "calendar"
-  | "outlook"
-  | "drive"
   | "notion"
   | "slack"
-  | "clickup"
-  | "trello"
-  | "asana"
-  | "zapier"
   | "chatgpt"
   | "claude"
   | "gemini";
@@ -94,17 +86,9 @@ const DEFS: Record<ToolId, Omit<ToolNode, "id" | "u" | "v" | "z">> = {
   zoom: { name: "Zoom", file: "zoom.svg", gives: "Llamadas" },
   meet: { name: "Google Meet", file: "googlemeet.svg", gives: "Llamadas" },
   gmail: { name: "Gmail", file: "gmail.svg", gives: "Correo" },
-  teams: { name: "Microsoft Teams", file: "teams.svg", gives: "Llamadas" },
   stripe: { name: "Stripe", file: "stripe.svg", gives: "Cobros y suscripciones" },
-  calendar: { name: "Google Calendar", file: "googlecalendar.svg", gives: "Agenda" },
-  outlook: { name: "Outlook", file: "outlook.svg", gives: "Correo y agenda" },
-  drive: { name: "Google Drive", file: "googledrive.svg", gives: "Documentos" },
   notion: { name: "Notion", file: "notion.svg", gives: "Documentos y procesos" },
   slack: { name: "Slack", file: "slack.svg", gives: "Mensajes del equipo" },
-  clickup: { name: "ClickUp", file: "clickup.svg", gives: "Tareas" },
-  trello: { name: "Trello", file: "trello.svg", gives: "Tareas" },
-  asana: { name: "Asana", file: "asana.svg", gives: "Tareas" },
-  zapier: { name: "Zapier", file: "zapier.svg", gives: "Cualquier otra herramienta" },
   chatgpt: { name: "ChatGPT", file: "openai.svg", gives: "Tu IA", mcp: true },
   claude: { name: "Claude", file: "claude.svg", gives: "Tu IA", mcp: true },
   gemini: { name: "Gemini", file: "gemini.svg", gives: "Tu IA", mcp: true },
@@ -121,7 +105,7 @@ export const logoBox = (file: string) => Math.round(24 * (LOGO_SCALE[file] ?? 1)
 export const toolInfo = (id: ToolId) => ({ id, ...DEFS[id] });
 
 /** Herramientas del grafo decorativo por defecto, en su orden en el anillo. */
-export const TOOL_IDS_DEFAULT: ToolId[] = ["gohighlevel", "harbiz", "zoom", "meet", "stripe", "gmail", "calendar", "drive", "notion", "slack", "chatgpt", "claude"];
+export const TOOL_IDS_DEFAULT: ToolId[] = ["gohighlevel", "harbiz", "zoom", "meet", "stripe", "gmail", "notion", "slack", "chatgpt", "claude"];
 
 const toolCache = new Map<string, ToolNode[]>();
 
@@ -148,31 +132,4 @@ export const TOOLS: ToolNode[] = toolsFor(TOOL_IDS_DEFAULT);
 export function howToolsFor(ids: readonly ToolId[]): ToolNode[] {
   const step = 360 / ids.length;
   return toolsFor(ids, Number.isInteger(90 / step) ? 90 + step / 2 : 90);
-}
-
-/**
- * Reparto en anillo por longitud de arco (para el contenedor estrecho del móvil):
- * los nodos quedan a la misma distancia entre sí, sin amontonarse arriba o abajo.
- */
-export function compactRing(count: number, rxPx = 126, ryPx = 179, startDeg = 90) {
-  const N = 720;
-  const pts: { a: number; s: number }[] = [];
-  let s = 0;
-  let prev = { x: Math.cos(0) * rxPx, y: 0 };
-  for (let i = 0; i <= N; i++) {
-    const a = (i / N) * Math.PI * 2;
-    const p = { x: Math.cos(a) * rxPx, y: Math.sin(a) * ryPx };
-    if (i > 0) s += Math.hypot(p.x - prev.x, p.y - prev.y);
-    pts.push({ a, s });
-    prev = p;
-  }
-  const total = s;
-  const start = (startDeg * Math.PI) / 180;
-  // longitud de arco hasta el ángulo de inicio
-  const s0 = pts.reduce((best, p) => (Math.abs(p.a - start) < Math.abs(best.a - start) ? p : best)).s;
-  return Array.from({ length: count }, (_, k) => {
-    const target = (s0 + (k / count) * total) % total;
-    const hit = pts.find((p) => p.s >= target) ?? pts[0];
-    return { u: Math.cos(hit.a), v: Math.sin(hit.a) };
-  });
 }

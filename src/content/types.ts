@@ -94,42 +94,16 @@ export type LandingContent = {
     integrations?: { tools: ToolId[]; text: string };
   };
 
+  /** Herramientas de la escena de "Cómo funciona" (paso 1), en su orden en el anillo. */
   tools: {
     ids: ToolId[];
-    title: string;
-    intro?: string;
-    srList: string;
-    /** Herramientas destacadas en el anillo (van primero en `ids`). */
-    featured?: ToolId[];
-    after?: { main: string; small?: string };
   };
 
-  /** "Qué entra en el grafo": qué lee Fivo de cada herramienta y qué le puedes preguntar gracias a eso. */
-  sources: {
-    title: string;
-    items: {
-      id: string;
-      name: string;
-      /** Herramientas del grupo (su logotipo sale de graph.ts). */
-      tools: ToolId[];
-      data?: string[];
-      question?: string;
-      /** Sin datos ni pregunta: una frase sola (p. ej. "Todo lo demás"). */
-      note?: string;
-      /** Integración principal: va primero y destacada. */
-      featured?: boolean;
-    }[];
-    footer: string;
-  };
-
-  /**
-   * "Conecta GoHighLevel y Harbiz": un bloque por herramienta y la conexión hacia el grafo de Fivo. Los datos y
-   * la pregunta de cada bloque salen del grupo de `sources` con el mismo id, para que digan lo mismo en los dos sitios.
-   */
+  /** "Conecta GoHighLevel y Harbiz": un bloque por herramienta (lo que entra en el grafo y una pregunta de ejemplo). */
   connect: {
     title: string;
-    tools: ToolId[];
     status: string;
+    items: { tool: ToolId; data: string[]; question: string }[];
   };
 
   /**

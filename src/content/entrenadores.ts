@@ -14,12 +14,8 @@ export const entrenadores: LandingContent = {
   repeatCta: true,
   ctaLines: {
     conexion: "GoHighLevel sabe cómo entró cada cliente. Harbiz sabe cómo entrena. Fivo te dice lo que pasa entre medias.",
-    herramientas: "¿Ya usas GoHighLevel y Harbiz? Te enseñamos cómo quedaría todo conectado.",
     equipo: "Te enseñamos cómo quedaría con tu equipo en **30 minutos**.",
     ia: "¿Usas Claude o ChatGPT? En la llamada te enseñamos cómo quedaría con tu negocio.",
-    "como-funciona": "Te lo enseñamos con un negocio como el tuyo en **30 minutos**.",
-    pregunta: "¿Qué le preguntarías tú a tu negocio? Tráelo a la llamada y lo vemos.",
-    prueba: "Mira si encaja con tu negocio.",
     faq: "¿Te queda alguna duda? Resuélvela en la llamada.",
   },
 
@@ -34,23 +30,17 @@ export const entrenadores: LandingContent = {
     integrations: { tools: ["gohighlevel", "harbiz"], text: "Se conecta con GoHighLevel y Harbiz" },
   },
 
+  /** Herramientas de la escena de "Cómo funciona" (paso 1). */
   tools: {
     ids: ["gohighlevel", "harbiz", "zoom", "meet", "stripe", "gmail", "notion", "slack", "chatgpt", "claude"],
-    title: "Se conecta a todo lo que usa tu equipo",
-    intro: "Pulsa una herramienta para ver qué lee Fivo.",
-    featured: ["gohighlevel", "harbiz"],
-    srList:
-      "GoHighLevel, Harbiz, Zoom, Google Meet, Stripe, Gmail, Notion y Slack, y ChatGPT y Claude vía MCP.",
   },
 
-  sources: {
-    title: "Qué entra en el grafo desde cada herramienta",
+  connect: {
+    title: "Conecta GoHighLevel y Harbiz. Fivo une las dos historias.",
+    status: "Conectado",
     items: [
       {
-        id: "gohighlevel",
-        name: "GoHighLevel",
-        tools: ["gohighlevel"],
-        featured: true,
+        tool: "gohighlevel",
         data: [
           "Contactos y sus etiquetas",
           "Origen del lead: anuncio, formulario o campaña",
@@ -62,10 +52,7 @@ export const entrenadores: LandingContent = {
         question: "¿Qué leads de esta semana han reservado llamada y cuáles se han quedado en el chat con el setter?",
       },
       {
-        id: "harbiz",
-        name: "Harbiz",
-        tools: ["harbiz"],
-        featured: true,
+        tool: "harbiz",
         data: [
           "Clientes",
           "Planes de entrenamiento",
@@ -77,52 +64,7 @@ export const entrenadores: LandingContent = {
         ],
         question: "¿Qué clientes han bajado sus sesiones este mes y cuándo renuevan?",
       },
-      {
-        id: "llamadas",
-        name: "Videollamadas",
-        tools: ["zoom", "meet", "teams"],
-        data: [
-          "Llamadas de venta",
-          "Llamadas de onboarding",
-          "Reuniones de equipo",
-          "El resumen de cada una: qué se dijo, quién lo dijo y en qué quedó",
-        ],
-        question: "¿Qué objeción se repite en las llamadas que no cierran?",
-      },
-      {
-        id: "equipo",
-        name: "Equipo y organización",
-        tools: ["slack", "notion", "drive", "gmail", "calendar", "outlook", "clickup", "trello", "asana"],
-        data: ["Mensajes del equipo", "Documentos y procesos", "Correo", "Agenda", "Tareas"],
-        question: "¿Qué tareas del lanzamiento del nuevo reto están paradas y quién las tiene?",
-      },
-      {
-        id: "pagos",
-        name: "Pagos",
-        tools: ["stripe"],
-        data: ["Cobros", "Suscripciones", "Impagos"],
-        question: "¿Qué clientes tienen un pago fallido y siguen entrenando?",
-      },
-      {
-        id: "ia",
-        name: "Tu IA",
-        tools: ["claude", "chatgpt", "gemini"],
-        note: "Claude, ChatGPT y Gemini consultan todo esto por MCP, sin copiar y pegar nada.",
-      },
-      {
-        id: "resto",
-        name: "Todo lo demás",
-        tools: ["zapier"],
-        note: "Zapier y los webhooks conectan cualquier otra herramienta.",
-      },
     ],
-    footer: "No cambias ninguna herramienta. Tu equipo sigue trabajando igual.",
-  },
-
-  connect: {
-    title: "Conecta GoHighLevel y Harbiz. Fivo une las dos historias.",
-    tools: ["gohighlevel", "harbiz"],
-    status: "Conectado",
   },
 
   team: {
@@ -431,7 +373,7 @@ export const entrenadores: LandingContent = {
       FAQ_TRANSCRIBE,
       {
         q: "¿Tengo que dejar GoHighLevel o Harbiz?",
-        a: "No. Siguen siendo tus herramientas de trabajo. Fivo se conecta a ellas y a tus videollamadas, tu correo y tus documentos. Si usas algo más, los webhooks conectan el resto.",
+        a: "No. Siguen siendo tus herramientas de trabajo. Fivo se conecta a ellas y también a Zoom, Google Meet, Microsoft Teams, Gmail, Outlook, Google Calendar, Google Drive, Slack, Notion, ClickUp, Trello, Asana y Stripe. Para el resto, Zapier y los webhooks.",
       },
       {
         q: "¿Qué datos lee Fivo de GoHighLevel y de Harbiz?",

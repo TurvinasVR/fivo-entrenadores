@@ -60,8 +60,8 @@ const Q_DELAY = 2900;
 const d = (ms: number) => ({ "--d": `${ms}ms` }) as CSSProperties;
 
 function ToolBlock({ id, side, delays }: { id: ToolId; side: Side; delays: number[] }) {
-  const { sources, connect } = useLanding();
-  const item = sources.items.find((it) => it.id === id);
+  const { connect } = useLanding();
+  const item = connect.items.find((it) => it.tool === id);
   const t = toolInfo(id);
   return (
     <article
@@ -208,13 +208,13 @@ function useGeometry(wrap: React.RefObject<HTMLDivElement | null>, delays: { a: 
 }
 
 export function ConnectSection() {
-  const { connect, sources } = useLanding();
+  const { connect } = useLanding();
   const reduced = useReducedMotion();
   const sectionRef = useRef<HTMLElement>(null);
   const wrap = useRef<HTMLDivElement>(null);
-  const [left, right] = connect.tools;
-  const na = sources.items.find((it) => it.id === left)?.data?.length ?? 0;
-  const nb = sources.items.find((it) => it.id === right)?.data?.length ?? 0;
+  const [left, right] = connect.items.map((it) => it.tool);
+  const na = connect.items[0]?.data.length ?? 0;
+  const nb = connect.items[1]?.data.length ?? 0;
   const delays = useMemo(() => chipDelays(na, nb), [na, nb]);
   const geo = useGeometry(wrap, delays);
 

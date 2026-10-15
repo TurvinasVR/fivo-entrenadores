@@ -2,7 +2,6 @@
 
 import AskDemo from "./AskDemo";
 import { useLanding } from "../landing/LandingContext";
-import { BlockCta } from "../landing/BlockCta";
 
 /** Bloque 6. Demo interactiva: una ventana de chat y tres preguntas seleccionables. */
 export function AskSection() {
@@ -14,7 +13,6 @@ export function AskSection() {
           {ask.title}
         </h2>
         <AskDemo />
-        <BlockCta position="pregunta" />
       </div>
     </section>
   );

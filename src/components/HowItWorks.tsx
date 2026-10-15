@@ -8,7 +8,6 @@ import { clamp01 } from "@/lib/scene/motion";
 import { useEarly } from "@/lib/hooks";
 import { useScene } from "@/lib/scene/store";
 import { useLanding } from "./landing/LandingContext";
-import { BlockCta } from "./landing/BlockCta";
 import { HowPoster } from "./scene/how/HowPoster";
 
 const HowStage = dynamic(() => import("./scene/how/HowStage"), { ssr: false });
@@ -125,9 +124,11 @@ export function HowItWorks() {
   );
 
   return (
-    <section ref={section} aria-labelledby="como-funciona" className="relative overflow-x-clip border-t border-line">
+    <section ref={section} aria-labelledby="como-funciona" className="relative overflow-x-clip">
       {/* Escritorio con movimiento: escenario fijo, el scroll es la línea de tiempo. CSS elige esta disposición o la apilada, así el HTML no cambia al cargar el JS */}
       <div className="hidden lg:block motion-reduce:lg:hidden">
+        {/* Mismo margen superior que el resto de secciones (80 px en escritorio) */}
+        <div aria-hidden className="h-20" />
         {/* El recorrido mide justo lo que dura la animación: la escena (alto --h) más 130dvh de scroll. Al acabar el paso 3
             la escena termina en el borde inferior del recorrido y el bloque del botón aparece enseguida, sin pantalla vacía. */}
         <div ref={track} data-how-track style={{ "--h": "max(min(72dvh, 640px), 36rem)", height: "calc(var(--h) + 130dvh)" } as React.CSSProperties}>
@@ -178,7 +179,8 @@ export function HowItWorks() {
               </div>
           </div>
         </div>
-        <BlockCta position="como-funciona" className="mx-auto max-w-[1280px] px-10 pb-8 pt-12" />
+        {/* Sin botón propio: el siguiente está al final de la sección de GoHighLevel y Harbiz. Margen inferior del sistema */}
+        <div aria-hidden className="h-8" />
       </div>
 
       {/* Móvil, tableta y movimiento reducido: cada paso con su escena */}
@@ -216,7 +218,6 @@ export function HowItWorks() {
               </article>
             ))}
           </div>
-          <BlockCta position="como-funciona" />
         </div>
       </div>
     </section>

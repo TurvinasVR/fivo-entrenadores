@@ -3,7 +3,6 @@
 import { siteConfig } from "@/config/site";
 import { Reveal } from "./Reveal";
 import { TestimonialCard } from "./Testimonial";
-import { BlockCta } from "./landing/BlockCta";
 import { useLanding } from "./landing/LandingContext";
 
 /**
@@ -51,7 +50,6 @@ export function Proof() {
             </div>
           </div>
         )}
-        <BlockCta position="prueba" />
       </div>
     </section>
   );

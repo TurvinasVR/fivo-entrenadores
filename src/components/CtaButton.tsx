@@ -15,15 +15,10 @@ export type CtaPosition =
   | "video_end"
   | "fijo-movil"
   | "gracias"
-  | "herramientas"
   | "conexion"
   | "equipo"
-  | "ia"
-  | "problema"
-  | "como-funciona"
-  | "pregunta"
   | "pregunta-enlace"
-  | "prueba"
+  | "ia"
   | "faq";
 
 type Props = {

@@ -246,7 +246,7 @@ export const entrenadores: LandingContent = {
       },
       {
         q: "¿Dónde se guardan mis datos y los de mis clientes?",
-        a: "Los datos se alojan en la UE y van cifrados en tránsito y en reposo. Tú decides quién ve qué, con control de acceso por usuario y equipo. Fivo cumple RGPD.",
+        a: "Los datos se alojan en la UE y van cifrados en tránsito y en reposo. Tú decides quién ve qué, con control de acceso por usuario y equipo. Fivo cumple RGPD y SOC 2.",
       },
       {
         q: "¿Funciona con Claude y ChatGPT?",

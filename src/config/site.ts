@@ -63,7 +63,7 @@ export const siteConfig = {
   siteUrl: env.siteUrl || "https://infoproductores.fivo.info",
 
   landings: {
-    infoproductores: landingRuntime(),
+    entrenadores: landingRuntime(),
   } as Record<LandingSlug, LandingRuntime>,
 
   /** Reserva de la llamada: todos los botones "Agendar mi llamada" llevan aquí, en la misma pestaña. */

@@ -3,12 +3,12 @@ import { siteConfig } from "@/config/site";
 import type { LandingSlug } from "./types";
 
 const META: Record<LandingSlug, { title: string; description: string; image: string; alt: string }> = {
-  infoproductores: {
-    title: "Fivo para infoproductores: deja de ser la única persona que sabe cómo va todo",
+  entrenadores: {
+    title: "Fivo para entrenadores personales: GoHighLevel, Harbiz y tus llamadas en un solo sitio",
     description:
-      "Fivo une las llamadas de tus closers, tus ventas, tus tareas y tu correo en un grafo de contexto, y lo conecta a Claude o ChatGPT. Agenda una llamada de 30 minutos.",
-    image: "/og-infoproductores.png",
-    alt: "Fivo para infoproductores",
+      "Fivo une tu CRM, tus clientes, tus llamadas de venta y tus check-ins en un grafo de contexto, y lo conecta a Claude o ChatGPT.",
+    image: "/og-entrenadores.png",
+    alt: "Fivo para entrenadores personales",
   },
 };
 

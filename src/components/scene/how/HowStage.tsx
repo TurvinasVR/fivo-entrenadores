@@ -5,7 +5,7 @@ import { useEffect, useMemo, useRef, useState } from "react";
 import { toolsFor } from "@/lib/scene/graph";
 import type { ToolId } from "@/lib/scene/graph";
 import type { HowScene } from "@/content/types";
-import { bezier, computeState, makeLayout, SOURCES } from "@/lib/scene/how/model";
+import { bezier, callTileStart, computeState, makeLayout, SOURCES } from "@/lib/scene/how/model";
 import type { HowState } from "@/lib/scene/how/model";
 import { clamp01, easeOut, lerp } from "@/lib/scene/motion";
 
@@ -452,7 +452,7 @@ export default function HowStage({ toolIds, scene, getT, staticT, use3d, onFrame
 
           <div className={`grid grid-cols-5 ${compact ? "gap-1.5" : "gap-2.5"}`}>
             {INITIALS.map((ini, k) => (
-              <div key={ini} ref={set(R.current.tiles, k)} className="group flex aspect-square items-center justify-center rounded-[12px] border border-line bg-bg data-[speaking='1']:border-accent" style={{ opacity: 0 }}>
+              <div key={ini} ref={set(R.current.tiles, k)} className="group flex aspect-square items-center justify-center rounded-[12px] border border-line bg-bg data-[speaking='1']:border-accent" style={{ opacity: 0, gridColumnStart: k === 0 ? callTileStart(INITIALS.length) : undefined }}>
                 <span className="flex h-[58%] w-[58%] items-center justify-center rounded-full bg-brand font-sans text-sm font-bold text-bg">
                   {ini}
                 </span>

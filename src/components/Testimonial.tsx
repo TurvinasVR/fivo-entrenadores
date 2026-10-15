@@ -1,6 +1,6 @@
 import type { TestimonialData } from "@/content/types";
 
-/** Tarjeta de testimonio de un infoproductor: foto (o inicial), nombre, nicho, equipo, frase y resultado. */
+/** Tarjeta de testimonio de un entrenador: foto (o inicial), nombre, especialidad, equipo, frase y resultado. */
 export function TestimonialCard({ data, featured = false }: { data: TestimonialData; featured?: boolean }) {
   return (
     <figure className={`card flex h-full flex-col p-6 ${featured ? "sm:p-8" : ""}`}>

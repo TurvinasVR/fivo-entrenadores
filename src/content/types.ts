@@ -1,7 +1,7 @@
 import type { ToolId } from "@/lib/scene/graph";
 import type { CtaPosition } from "@/components/CtaButton";
 
-export type LandingSlug = "infoproductores";
+export type LandingSlug = "entrenadores";
 
 export type ScaleFigure = { figure: string; label: string; sr: string };
 
@@ -53,8 +53,9 @@ export type AskQuestion = {
   title: string;
   /** Nodos de llamadas (0 a 5) que sustentan la respuesta. */
   used: number[];
-  calls: { title: string; note?: string; tone?: "win" | "lose" }[];
-  /** Nombre de cada ficha de fuente ("Llamada" por defecto). */
+  /** Fichas de fuente. `sourceLabel` en una ficha le da nombre propio ("GoHighLevel", "Harbiz"...), sin número. */
+  calls: { title: string; note?: string; tone?: "win" | "lose"; sourceLabel?: string }[];
+  /** Nombre de las fichas de fuente sin nombre propio, numeradas ("Llamada" por defecto). */
   sourceLabel?: string;
   /** Respuesta completa para lectores de pantalla. */
   sr: string;

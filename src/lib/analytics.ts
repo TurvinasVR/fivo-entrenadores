@@ -27,9 +27,9 @@ declare global {
 /**
  * Landing de la que sale cada evento (parámetro `landing`).
  */
-export type Landing = "infoproductores";
+export type Landing = "entrenadores";
 export function currentLanding(): Landing {
-  return "infoproductores";
+  return "entrenadores";
 }
 
 const queue: { name: AnalyticsEvent; params: Params; beacon: boolean }[] = [];

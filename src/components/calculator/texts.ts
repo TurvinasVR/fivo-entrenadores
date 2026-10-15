@@ -8,7 +8,7 @@ export const STATIC_ES: Record<string, string> = {
   "s019": "Gasto anual",
   "s020": "Salarios y cargas de todo el equipo.",
   "s021": "Ingresos anuales aprox.",
-  "s022": "Lo que factura al año la venta de tus infoproductos.",
+  "s022": "Lo que factura al año tu negocio de entrenamiento.",
   "s023": "Continuar",
   "s036": "Atrás",
   "s037": "Ver mi resultado",

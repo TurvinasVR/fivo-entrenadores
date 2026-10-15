@@ -7,7 +7,7 @@ export const metadata: Metadata = {
   robots: { index: false, follow: false },
 };
 
-// La página de gracias de la landing de infoproductores
+// La página de gracias de la landing de entrenadores
 export default function Gracias() {
   return <ThanksPage content={LANDING} />;
 }

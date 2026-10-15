@@ -4,7 +4,7 @@ import { LANDING } from "@/content/index";
 import { landingMetadata } from "@/content/meta";
 import { ACTIVE_LANDING } from "@/lib/activeLanding";
 
-// La raíz muestra la landing de infoproductores
+// La raíz muestra la landing de entrenadores
 export const metadata: Metadata = landingMetadata(ACTIVE_LANDING);
 
 export default function Home() {

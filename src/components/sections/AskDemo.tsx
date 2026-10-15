@@ -383,7 +383,7 @@ export default function AskDemo() {
                   <span className="flex items-center justify-between gap-2">
                     <span className="flex items-center gap-1.5 font-medium">
                       <span className="h-2 w-2 shrink-0 rounded-full bg-brand" />
-                      {q.sourceLabel ?? "Llamada"} {i + 1}
+                      {c.sourceLabel ?? `${q.sourceLabel ?? "Llamada"} ${i + 1}`}
                     </span>
                     <CaretDown size={14} className="shrink-0 text-fg-muted transition-transform duration-300" style={{ transform: folded[i] ? "none" : "rotate(180deg)" }} aria-hidden />
                   </span>

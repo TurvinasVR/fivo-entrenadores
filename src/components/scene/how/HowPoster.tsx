@@ -1,7 +1,7 @@
 import { toolsFor } from "@/lib/scene/graph";
 import type { ToolId } from "@/lib/scene/graph";
 import type { HowScene } from "@/content/types";
-import { STATIC_T, computeState, makeLayout } from "@/lib/scene/how/model";
+import { STATIC_T, callTileStart, computeState, makeLayout } from "@/lib/scene/how/model";
 
 /**
  * Estado inicial estático de cada escena de "Cómo funciona": el grafo con sus nodos y líneas en la posición
@@ -87,8 +87,8 @@ export function HowPoster({ k, toolIds, scene, compact = false }: { k: 0 | 1 | 2
                 </span>
               </div>
               <div className={`grid grid-cols-5 ${compact ? "gap-1.5" : "gap-2.5"}`}>
-                {scene.initials.map((ini) => (
-                  <div key={ini} className="flex aspect-square items-center justify-center rounded-[12px] border border-line bg-bg">
+                {scene.initials.map((ini, k) => (
+                  <div key={ini} style={{ gridColumnStart: k === 0 ? callTileStart(scene.initials.length) : undefined }} className="flex aspect-square items-center justify-center rounded-[12px] border border-line bg-bg">
                     <span className="flex h-[58%] w-[58%] items-center justify-center rounded-full bg-brand font-sans text-sm font-bold text-bg">{ini}</span>
                   </div>
                 ))}

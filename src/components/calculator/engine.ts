@@ -57,7 +57,7 @@ export function initCalculator(root: HTMLElement, host: CalculatorHost): () => v
       timeLabel:"Tiempo recuperado del equipo",
       timeNote:"{p} de {loss} que hoy se pierden buscando información (≈ 20 % del gasto de {n} {pl}: {team})",
       extraLabel:"Ventas extra en tus llamadas de venta",
-      extraNote:"{p} sobre {x} de ingresos anuales de tu infoproducto",
+      extraNote:"{p} sobre {x} de ingresos anuales de tu negocio de entrenamiento",
       tagOwn:"Tu dato", tagRef:"Referencia", tagEst:"Estimación",
       gA:"A. Herramientas que dejas de pagar", gB:"B. Análisis externo que te ahorras", gC:"C. Tiempo que recupera tu equipo (estimación)", gD:"D. Ventas extra (estimación)",
       subtotal:"Subtotal {l}",

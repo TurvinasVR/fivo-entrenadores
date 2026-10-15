@@ -265,3 +265,8 @@ export function bezier(a: { x: number; y: number }, b: { x: number; y: number },
   const m = 1 - k;
   return { x: m * m * a.x + 2 * m * k * c.x + k * k * b.x, y: m * m * a.y + 2 * m * k * c.y + k * k * b.y };
 }
+
+/** Columna (1 a 5) de la primera ficha de la videollamada, para centrar participantes y asistente en la rejilla de 5. */
+export function callTileStart(participants: number) {
+  return Math.floor((5 - Math.min(participants + 1, 5)) / 2) + 1;
+}

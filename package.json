@@ -4,7 +4,7 @@
   "private": true,
   "scripts": {
     "dev": "next dev",
-    "build": "next build",
+    "build": "next build && node scripts/robots-meta.mjs",
     "lint": "tsc --noEmit",
     "serve:static": "node scripts/serve-static.mjs out 4300"
   },

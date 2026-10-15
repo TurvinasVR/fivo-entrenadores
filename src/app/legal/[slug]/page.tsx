@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
+import { ROBOTS } from "@/content/meta";
 
 const PAGES: Record<string, string> = {
   "aviso-legal": "Aviso legal",
@@ -13,7 +14,7 @@ export function generateStaticParams() {
 
 export async function generateMetadata({ params }: { params: Promise<{ slug: string }> }): Promise<Metadata> {
   const { slug } = await params;
-  return { title: `${PAGES[slug] ?? "Legal"} | Fivo`, robots: { index: false, follow: false } };
+  return { title: `${PAGES[slug] ?? "Legal"} | Fivo`, robots: ROBOTS };
 }
 
 /** Páginas legales de sustitución. Apunta siteConfig.legal a las reales cuando existan. */

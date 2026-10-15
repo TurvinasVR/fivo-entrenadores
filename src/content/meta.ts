@@ -2,6 +2,12 @@ import type { Metadata } from "next";
 import { siteConfig } from "@/config/site";
 import type { LandingSlug } from "./types";
 
+/**
+ * Fuera de buscadores e IA: solo se entra con el enlace directo. Va en todas las páginas por sus metadatos;
+ * scripts/robots-meta.mjs deja después una sola etiqueta por página en out (la 404 trae además la de Next).
+ */
+export const ROBOTS = "noindex, nofollow, noarchive, nosnippet, noimageindex";
+
 const META: Record<LandingSlug, { title: string; description: string; image: string; alt: string }> = {
   entrenadores: {
     title: "Fivo para entrenadores personales: GoHighLevel, Harbiz y tus llamadas en un solo sitio",
@@ -19,7 +25,7 @@ export function landingMetadata(slug: LandingSlug): Metadata {
     metadataBase: new URL(siteConfig.siteUrl),
     title: m.title,
     description: m.description,
-    robots: { index: false, follow: false },
+    robots: ROBOTS,
     openGraph: {
       title: m.title,
       description: m.description,

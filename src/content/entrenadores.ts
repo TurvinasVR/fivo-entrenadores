@@ -23,9 +23,9 @@ export const entrenadores: LandingContent = {
 
   hero: {
     label: "Para entrenadores personales con equipo",
-    title: "Tus leads viven en GoHighLevel y tus clientes en Harbiz. Júntalos en un sitio al que puedas preguntarle",
+    title: "El segundo cerebro de tu negocio de entrenamiento",
     subtitle:
-      "Fivo une tu CRM, tus clientes, tus llamadas de venta y tus check-ins en un grafo de contexto, y lo conecta a Claude o ChatGPT. Deja de ser la única persona que sabe cómo va cada cliente.",
+      "Fivo conecta GoHighLevel, Harbiz y las herramientas de tu equipo en una sola memoria. Pregúntale cómo va cualquier cliente, lead o persona de tu equipo, también desde Claude o ChatGPT.",
     videoLabel: "Vídeo de Fivo para entrenadores personales",
     videoEnd: { title: "¿Lo vemos con tu negocio?", replay: "Volver a ver" },
     trust: "Cumple RGPD. Datos alojados en la UE. Tú decides quién ve qué.",
@@ -42,11 +42,14 @@ export const entrenadores: LandingContent = {
   },
 
   problem: {
-    title: { main: "¿Cuántas veces al día preguntas “¿cómo va este cliente?”?" },
+    title: { main: "Si todo pasa por tu cabeza, tu negocio no puede crecer más que tú" },
     pains: [
-      { text: "Para saber cómo va un cliente abres Harbiz, GoHighLevel y el WhatsApp de su coach.", group: "clientes" },
-      { text: "Lo que el closer promete en la llamada de venta no le llega al coach que lleva al cliente.", group: "ventas" },
-      { text: "Cada vez que usas la IA tienes que explicarle tu método desde cero.", group: "ia" },
+      { text: "Tu setter, tu closer y tu coach te preguntan a ti lo que ya está en GoHighLevel o en Harbiz.", group: "equipo" },
+      { text: "Lo que el closer promete en la llamada no le llega al coach que lleva al cliente.", group: "ventas" },
+      {
+        text: "No sabes por qué un closer cierra más que otro ni por qué un cliente deja de renovar, porque no tienes tiempo de mirarlo.",
+        group: "clientes",
+      },
     ],
     groups: [
       {
@@ -60,40 +63,43 @@ export const entrenadores: LandingContent = {
           { f: "gohighlevel.svg", dx: -38, dy: -22 },
           { f: "zoom.svg", dx: 18, dy: -38 },
           { f: "googlemeet.svg", dx: -14, dy: 34 },
-          { f: "gmail.svg", dx: 42, dy: 10 },
+          { f: "googlecalendar.svg", dx: 42, dy: 10 },
         ],
       },
       {
-        id: "ia",
-        label: "Tu IA",
+        id: "equipo",
+        label: "Tu equipo",
         cx: 0.76,
-        cy: 0.2,
-        ring: [124, 100],
-        labelTop: 60,
+        cy: 0.22,
+        ring: [160, 140],
+        labelTop: 76,
         nodes: [
-          { f: "claude.svg", dx: -26, dy: -4 },
-          { f: "openai.svg", dx: 26, dy: 10 },
+          { f: "slack.svg", dx: -34, dy: -18 },
+          { f: "notion.svg", dx: 24, dy: -26 },
+          { f: "gmail.svg", dx: -4, dy: 30 },
         ],
       },
       {
         id: "clientes",
-        label: "Clientes y entrenos",
-        cx: 0.58,
+        label: "Clientes y pagos",
+        cx: 0.56,
         cy: 0.72,
         ring: [170, 150],
         labelTop: 82,
         nodes: [
-          { f: "harbiz.svg", dx: -34, dy: -8 },
-          { f: "googledrive.svg", dx: 36, dy: 12 },
+          { f: "harbiz.svg", dx: -40, dy: -12 },
+          { f: "stripe.svg", dx: 30, dy: -24 },
+          { f: "googledrive.svg", dx: 14, dy: 30 },
         ],
       },
     ],
     compare: true,
     rows: [
-      { topic: "Saber cómo va un cliente", today: "Abrir Harbiz, mirar sus check-ins y preguntar a su coach", fivo: "Preguntarlo y tener la respuesta al momento" },
-      { topic: "Preparar una llamada de venta", today: "Buscar el lead en GoHighLevel y leer su chat con el setter", fivo: "Un resumen con lo que pidió y lo que le preocupa" },
-      { topic: "Saber por qué alguien no renueva", today: "Intuirlo, si te acuerdas de su caso", fivo: "Su historia entera, del anuncio al último check-in" },
-      { topic: "Usar Claude o ChatGPT", today: "Explicar tu método en cada conversación", fivo: "Tu IA ya conoce tu método y a tus clientes" },
+      { topic: "Saber cómo va un cliente", today: "Abrir Harbiz, mirar sus check-ins y preguntar a su coach", fivo: "Preguntarlo y tenerlo en una respuesta" },
+      { topic: "Preparar una llamada de venta", today: "Buscar al lead en GoHighLevel y leer todo su chat", fivo: "Un resumen con lo que quiere y lo que le frena" },
+      { topic: "Saber qué hace bien tu mejor closer", today: "Escuchar grabaciones que nunca tienes tiempo de escuchar", fivo: "Lo que repite en las llamadas que cierra" },
+      { topic: "Pasar un cliente del closer al coach", today: "Un mensaje en WhatsApp y esperar que no se pierda nada", fivo: "El coach ve lo que se le prometió en la venta" },
+      { topic: "Usar Claude o ChatGPT", today: "Explicarle tu método cada vez", fivo: "Ya conoce tu método, tus clientes y tu equipo" },
     ],
   },
 

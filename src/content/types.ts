@@ -97,7 +97,31 @@ export type LandingContent = {
     title: string;
     intro?: string;
     srList: string;
-    after?: { main: string; small: string };
+    after?: { main: string; small?: string };
+  };
+
+  /** "Qué entra en el grafo": qué lee Fivo de cada herramienta y qué le puedes preguntar gracias a eso. */
+  sources: {
+    title: string;
+    items: {
+      id: string;
+      name: string;
+      /** Herramientas del grupo (su logotipo sale de graph.ts). */
+      tools: ToolId[];
+      data?: string[];
+      question?: string;
+      /** Sin datos ni pregunta: una frase sola (p. ej. "Todo lo demás"). */
+      note?: string;
+    }[];
+    footer: string;
+  };
+
+  /** "Tu IA ya conoce tu negocio": Fivo por MCP dentro de Claude, ChatGPT y Gemini. */
+  ai: {
+    title: string;
+    text: string;
+    tools: ToolId[];
+    prompts: { text: string; sources: { label: string; tool?: ToolId }[] }[];
   };
 
   problem: {

@@ -8,6 +8,8 @@ import { HowItWorks } from "../HowItWorks";
 import { ToolsScene } from "../scene/ToolsScene";
 import { ProblemSection } from "../sections/ProblemSection";
 import { AskSection } from "../sections/AskSection";
+import { SourcesSection } from "../sections/SourcesSection";
+import { AiSection } from "../sections/AiSection";
 import Reviews from "../reviews/Reviews";
 import { useLanding } from "./LandingContext";
 
@@ -21,10 +23,12 @@ export default function BelowFold() {
         <div className="mx-auto max-w-[1120px] px-5 pb-4 pt-5 lg:px-10 lg:pb-12 lg:pt-6">
           <Reviews headingLevel={2} className="" />
         </div>
-        <ToolsScene />
         <ProblemSection />
+        <SourcesSection />
+        <ToolsScene />
         <HowItWorks />
         <AskSection />
+        <AiSection />
         <Proof />
         <Faq />
       </main>

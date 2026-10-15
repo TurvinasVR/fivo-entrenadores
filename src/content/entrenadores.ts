@@ -14,6 +14,7 @@ export const entrenadores: LandingContent = {
   repeatCta: true,
   ctaLines: {
     herramientas: "¿Ya usas GoHighLevel y Harbiz? Te enseñamos cómo quedaría todo conectado.",
+    ia: "¿Usas Claude o ChatGPT? En la llamada te enseñamos cómo quedaría con tu negocio.",
     problema: "Así se ve con Fivo. En la llamada lo vemos con tu negocio.",
     "como-funciona": "Te lo enseñamos con un negocio como el tuyo en **30 minutos**.",
     pregunta: "¿Qué le preguntarías tú a tu negocio? Tráelo a la llamada y lo vemos.",
@@ -32,13 +33,106 @@ export const entrenadores: LandingContent = {
   },
 
   tools: {
-    ids: ["gohighlevel", "harbiz", "zoom", "meet", "gmail", "drive", "chatgpt", "claude"],
-    title: "Se conecta a GoHighLevel, a Harbiz y a tu IA",
-    srList: "GoHighLevel, Harbiz, Zoom, Google Meet, Gmail y Google Drive, y ChatGPT y Claude vía MCP.",
+    ids: ["gohighlevel", "harbiz", "zoom", "meet", "stripe", "gmail", "notion", "slack", "chatgpt", "claude"],
+    title: "Se conecta a todo lo que usa tu equipo",
+    srList:
+      "GoHighLevel, Harbiz, Zoom, Google Meet, Stripe, Gmail, Notion y Slack, y ChatGPT y Claude vía MCP.",
     after: {
-      main: "Tu CRM por un lado y tus clientes por otro no son un sistema. Fivo los une sin que cambies ninguno.",
-      small: "¿Usas algo que no está aquí? Los webhooks conectan el resto.",
+      main: "GoHighLevel sabe cómo entró cada cliente. Harbiz sabe cómo entrena. Fivo une las dos historias.",
     },
+  },
+
+  sources: {
+    title: "Qué entra en el grafo desde cada herramienta",
+    items: [
+      {
+        id: "gohighlevel",
+        name: "GoHighLevel",
+        tools: ["gohighlevel"],
+        data: [
+          "Contactos y sus etiquetas",
+          "Origen del lead: anuncio, formulario o campaña",
+          "Oportunidades y su etapa en el pipeline",
+          "Conversaciones de WhatsApp, Instagram, Facebook, SMS y email",
+          "Citas del calendario y quién no se presentó",
+          "Respuestas de formularios y encuestas",
+        ],
+        question: "¿Qué leads de esta semana han reservado llamada y cuáles se han quedado en el chat con el setter?",
+      },
+      {
+        id: "harbiz",
+        name: "Harbiz",
+        tools: ["harbiz"],
+        data: [
+          "Clientes",
+          "Planes de entrenamiento",
+          "Sesiones completadas",
+          "Pautas nutricionales",
+          "Seguimiento y progreso",
+          "Reservas",
+          "Pagos y suscripciones",
+        ],
+        question: "¿Qué clientes han bajado sus sesiones este mes y cuándo renuevan?",
+      },
+      {
+        id: "llamadas",
+        name: "Videollamadas",
+        tools: ["zoom", "meet", "teams"],
+        data: [
+          "Llamadas de venta",
+          "Llamadas de onboarding",
+          "Reuniones de equipo",
+          "El resumen de cada una: qué se dijo, quién lo dijo y en qué quedó",
+        ],
+        question: "¿Qué objeción se repite en las llamadas que no cierran?",
+      },
+      {
+        id: "equipo",
+        name: "Equipo y organización",
+        tools: ["slack", "notion", "drive", "gmail", "calendar", "outlook", "clickup", "trello", "asana"],
+        data: ["Mensajes del equipo", "Documentos y procesos", "Correo", "Agenda", "Tareas"],
+        question: "¿Qué tareas del lanzamiento del nuevo reto están paradas y quién las tiene?",
+      },
+      {
+        id: "pagos",
+        name: "Pagos",
+        tools: ["stripe"],
+        data: ["Cobros", "Suscripciones", "Impagos"],
+        question: "¿Qué clientes tienen un pago fallido y siguen entrenando?",
+      },
+      {
+        id: "resto",
+        name: "Todo lo demás",
+        tools: ["zapier"],
+        note: "Zapier y los webhooks conectan cualquier otra herramienta.",
+      },
+    ],
+    footer: "No cambias ninguna herramienta. Tu equipo sigue trabajando igual.",
+  },
+
+  ai: {
+    title: "Tu IA ya conoce tu negocio",
+    text: "Fivo se conecta por MCP a Claude, ChatGPT y Gemini. Les das acceso a todo lo de arriba sin copiar y pegar nada.",
+    tools: ["claude", "chatgpt", "gemini"],
+    prompts: [
+      {
+        text: "Escribe a Lucía para proponerle ajustar el plan a sus turnos antes de que renueve.",
+        sources: [{ label: "Llamada de venta" }, { label: "Harbiz", tool: "harbiz" }],
+      },
+      {
+        text: "Prepárame un guion de llamada para los leads del Reto 21 días que se quedaron en el chat.",
+        sources: [{ label: "GoHighLevel", tool: "gohighlevel" }, { label: "Llamadas" }],
+      },
+      {
+        text: "Hazme el resumen del mes para la reunión del equipo: ventas, bajas y qué ha funcionado.",
+        sources: [
+          { label: "GoHighLevel", tool: "gohighlevel" },
+          { label: "Harbiz", tool: "harbiz" },
+          { label: "Stripe", tool: "stripe" },
+          { label: "Llamadas" },
+        ],
+      },
+    ],
   },
 
   problem: {

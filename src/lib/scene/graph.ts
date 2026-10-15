@@ -105,7 +105,7 @@ export const logoBox = (file: string) => Math.round(24 * (LOGO_SCALE[file] ?? 1)
 export const toolInfo = (id: ToolId) => ({ id, ...DEFS[id] });
 
 /** Herramientas del grafo decorativo por defecto, en su orden en el anillo. */
-export const TOOL_IDS_DEFAULT: ToolId[] = ["gohighlevel", "harbiz", "zoom", "meet", "stripe", "gmail", "notion", "slack", "chatgpt", "claude"];
+export const TOOL_IDS_DEFAULT: ToolId[] = ["gohighlevel", "harbiz", "zoom", "meet", "gmail", "slack", "stripe", "claude"];
 
 const toolCache = new Map<string, ToolNode[]>();
 

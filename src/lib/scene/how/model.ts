@@ -42,9 +42,9 @@ export function makeLayout(W: number, H: number): Layout {
       W, H, unit, compact, RX: 3.9, RY: 4.7,
       center: { x: 0, y: 0.2, s: 1 },
       corner: { x: 0, y: 4.55, s: 0.3 },
-      right: { x: 0, y: 4.6, s: 0.32 },
+      right: { x: 0, y: 4.7, s: 0.37 }, // paso 3 en móvil: el anillo, encima del chat y sin discos pisados
       call: { x: W * 0.02, y: H * 0.3, w: W * 0.96, h: H * 0.68 },
-      chat: { x: W * 0.02, y: H * 0.3, w: W * 0.96, h: H * 0.68 },
+      chat: { x: W * 0.02, y: H * 0.35, w: W * 0.96, h: H * 0.63 }, // empieza bajo el anillo del paso 3
     };
   }
   const unit = Math.min(W / 8.8, H / 6.4);
@@ -54,7 +54,7 @@ export function makeLayout(W: number, H: number): Layout {
     corner: { x: 2.35, y: 1.75, s: 0.4 },
     right: { x: 2.2, y: 0, s: 0.68 },
     call: { x: W * 0.02, y: H * 0.08, w: W * 0.64, h: H * 0.88 },
-    chat: { x: W * 0.02, y: H * 0.08, w: W * 0.5, h: H * 0.88 },
+    chat: { x: W * 0.02, y: H * 0.08, w: W * 0.46, h: H * 0.88 }, // 46 %: ningún logotipo del anillo queda bajo el chat
   };
 }
 

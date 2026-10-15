@@ -32,7 +32,7 @@ export const entrenadores: LandingContent = {
 
   /** Herramientas de la escena de "Cómo funciona" (paso 1). */
   tools: {
-    ids: ["gohighlevel", "harbiz", "zoom", "meet", "stripe", "gmail", "notion", "slack", "chatgpt", "claude"],
+    ids: ["gohighlevel", "harbiz", "zoom", "meet", "gmail", "slack", "stripe", "claude"],
   },
 
   connect: {
@@ -212,7 +212,7 @@ export const entrenadores: LandingContent = {
     steps: [
       {
         title: "Conectas GoHighLevel, Harbiz y las herramientas de tu equipo. No cambias ninguna.",
-        desc: "Escena animada: los logotipos de GoHighLevel, Harbiz, Zoom, Google Meet, Stripe, Gmail, Notion, Slack, ChatGPT y Claude aparecen sueltos y se van conectando uno a uno con el nodo central de Fivo, hasta formar un grafo unido.",
+        desc: "Escena animada: los logotipos de GoHighLevel, Harbiz, Zoom, Google Meet, Gmail, Slack, Stripe y Claude aparecen sueltos y se van conectando uno a uno con el nodo central de Fivo, hasta formar un grafo unido.",
       },
       {
         title: "Cada lead, cada llamada, cada check-in y cada pago entra en el grafo, unido a su persona y a su momento.",

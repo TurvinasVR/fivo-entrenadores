@@ -228,15 +228,15 @@ export const entrenadores: LandingContent = {
   how: {
     steps: [
       {
-        title: "Conectas GoHighLevel, Harbiz y tus videollamadas. No cambias ninguna.",
-        desc: "Escena animada: los logotipos de GoHighLevel, Harbiz, Zoom, Google Meet, Gmail, Google Drive, ChatGPT y Claude aparecen sueltos y se van conectando uno a uno con el nodo central de Fivo, hasta formar un grafo unido.",
+        title: "Conectas GoHighLevel, Harbiz y las herramientas de tu equipo. No cambias ninguna.",
+        desc: "Escena animada: los logotipos de GoHighLevel, Harbiz, Zoom, Google Meet, Stripe, Gmail, Notion, Slack, ChatGPT y Claude aparecen sueltos y se van conectando uno a uno con el nodo central de Fivo, hasta formar un grafo unido.",
       },
       {
-        title: "Cada lead, cada llamada de venta y cada check-in entra en el grafo: quién es, qué se le prometió y cómo va.",
+        title: "Cada lead, cada llamada, cada check-in y cada pago entra en el grafo, unido a su persona y a su momento.",
         desc: "Escena animada de ejemplo: en una llamada de venta con dos participantes entra el asistente de Fivo. Lo que pasa se convierte en tres nodos: qué se dijo (entrena con turnos de noche), quién lo hizo (el closer promete adaptar el plan) y en qué quedó (programa de 12 semanas). Los tres se conectan entre sí y vuelan al grafo.",
       },
       {
-        title: "Preguntas a Fivo, o a tu propia IA, y te responde con datos de tu negocio.",
+        title: "Preguntas a Fivo, o a tu IA, y te responde con datos de tu negocio.",
         desc: "Escena animada de ejemplo: en el chat se escribe la pregunta «¿Qué clientes pueden no renovar este mes?». Se iluminan en el grafo las fuentes de donde sale la respuesta. La respuesta dice que tres clientes renuevan este mes y han bajado sus sesiones en Harbiz, y que a Lucía se le prometió en la llamada de venta adaptar el plan a sus turnos, que es justo lo que ha fallado, así que conviene proponerle el ajuste antes de hablar de renovación. Cada referencia está enlazada con su fuente: la llamada de venta, el check-in de la semana 5 y el plan en Harbiz.",
       },
     ],
@@ -351,6 +351,30 @@ export const entrenadores: LandingContent = {
           ],
         },
       },
+      {
+        id: "lanzamiento",
+        q: "¿Qué se ha quedado sin hacer del lanzamiento del nuevo reto?",
+        title: "La página del nuevo reto está parada desde el jueves.",
+        used: [0, 2, 5],
+        calls: [
+          { sourceLabel: "ClickUp", title: "Tarea: página del nuevo reto" },
+          { sourceLabel: "Slack", title: "Canal del lanzamiento" },
+          { sourceLabel: "GoHighLevel", title: "Embudo del nuevo reto" },
+        ],
+        sr: "Del lanzamiento del nuevo reto, lo que se ha quedado sin hacer es la página del reto. Se decidió en la reunión del lunes, se asignó a Pablo y está parada desde el jueves, esperando los vídeos de los ejercicios. Lo tiene ahora Pablo, esperando a contenido. Ejemplo.",
+        fallback:
+          "La página del nuevo reto se decidió en la reunión del lunes, se asignó a Pablo y está parada desde el jueves, esperando los vídeos de los ejercicios. Lo tiene ahora Pablo, esperando a contenido. Ejemplo.",
+        answer: {
+          kind: "timeline",
+          events: [
+            { label: "Decidido", detail: "En la reunión del lunes" },
+            { label: "Asignado", detail: "La página del reto, a Pablo" },
+            { label: "Parado", detail: "Esperando los vídeos de los ejercicios desde el jueves" },
+          ],
+          nowLabel: "Lo tiene ahora",
+          now: "Pablo, esperando a contenido",
+        },
+      },
     ],
   },
 
@@ -367,6 +391,14 @@ export const entrenadores: LandingContent = {
       {
         q: "¿Tengo que dejar GoHighLevel o Harbiz?",
         a: "No. Siguen siendo tus herramientas de trabajo. Fivo se conecta a ellas y a tus videollamadas, tu correo y tus documentos. Si usas algo más, los webhooks conectan el resto.",
+      },
+      {
+        q: "¿Qué datos lee Fivo de GoHighLevel y de Harbiz?",
+        a: "De GoHighLevel, tus contactos, oportunidades, conversaciones, citas y formularios. De Harbiz, tus clientes, planes, sesiones, nutrición, seguimiento y pagos. Tú eliges qué conectas.",
+      },
+      {
+        q: "¿Mi equipo tiene que aprender algo nuevo?",
+        a: "No. Siguen trabajando en GoHighLevel, en Harbiz y en sus herramientas de siempre. Fivo se alimenta de lo que ya hacen.",
       },
       {
         q: "¿Mi equipo va a sentir que lo vigilo?",

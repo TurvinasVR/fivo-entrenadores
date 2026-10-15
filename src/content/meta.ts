@@ -10,9 +10,9 @@ export const ROBOTS = "noindex, nofollow, noarchive, nosnippet, noimageindex";
 
 const META: Record<LandingSlug, { title: string; description: string; image: string; alt: string }> = {
   entrenadores: {
-    title: "Fivo para entrenadores personales: GoHighLevel, Harbiz y tus llamadas en un solo sitio",
+    title: "Fivo para entrenadores personales: el segundo cerebro de tu negocio",
     description:
-      "Fivo une tu CRM, tus clientes, tus llamadas de venta y tus check-ins en un grafo de contexto, y lo conecta a Claude o ChatGPT.",
+      "Fivo conecta GoHighLevel, Harbiz y las herramientas de tu equipo en una sola memoria. Pregúntale cómo va cualquier cliente, lead o persona de tu equipo.",
     image: "/og-entrenadores.png",
     alt: "Fivo para entrenadores personales",
   },

@@ -42,6 +42,7 @@ export function ClientLogos() {
     >
       {CLIENTS.map((c) => (
         <li key={c.name} className="flex items-center">
+          {/* block: sin línea base, la caja no se mueve 1px al llegar la imagen (CLS 0) */}
           {/* eslint-disable-next-line @next/next/no-img-element */}
           <img
             src={ready ? `/logos/clients/${c.file}` : undefined}
@@ -51,7 +52,7 @@ export function ClientLogos() {
             decoding="async"
             loading="eager"
             fetchPriority="low"
-            className="logo-mono h-[calc(var(--lh)*0.55*1px)] w-[calc(var(--lh)*0.55*1px*var(--ar))] opacity-70 sm:h-[calc(var(--lh)*0.8*1px)] sm:w-[calc(var(--lh)*0.8*1px*var(--ar))] xl:h-[calc(var(--lh)*1px)] xl:w-[calc(var(--lh)*1px*var(--ar))]"
+            className="logo-mono block h-[calc(var(--lh)*0.55*1px)] w-[calc(var(--lh)*0.55*1px*var(--ar))] opacity-70 sm:h-[calc(var(--lh)*0.8*1px)] sm:w-[calc(var(--lh)*0.8*1px*var(--ar))] xl:h-[calc(var(--lh)*1px)] xl:w-[calc(var(--lh)*1px*var(--ar))]"
             style={{ "--lh": c.height, "--ar": c.w / c.h } as React.CSSProperties}
           />
         </li>

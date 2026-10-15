@@ -33,14 +33,14 @@ export function Hero({ content }: { content: LandingContent }) {
   const { hero, slug } = content;
   return (
     <section aria-labelledby="titular" className="relative overflow-hidden">
-      <div className="mx-auto flex max-w-[1120px] flex-col items-center px-5 pb-5 pt-1 text-center sm:pt-3 lg:pb-8">
+      <div className="mx-auto flex max-w-[1120px] flex-col items-center px-5 pb-5 pt-1 text-center sm:pt-3 lg:pb-8 lg:pt-1">
         <p className="rounded-[6px] border border-line bg-surface px-3 py-1 text-[12px] font-medium text-fg-muted sm:text-[13px]">
           {rich(hero.label)}
         </p>
 
         <h1
           id="titular"
-          className="mt-3 max-w-[820px] text-balance font-display text-[clamp(1.5rem,1.1rem+2vw,2.75rem)] font-black leading-[1.1] tracking-[-0.015em] sm:mt-4"
+          className="mt-3 max-w-[820px] text-balance font-display text-[clamp(1.5rem,1.1rem+2vw,2.75rem)] font-black leading-[1.1] tracking-[-0.015em] sm:mt-4 lg:mt-3"
         >
           {hero.title}
         </h1>
@@ -49,7 +49,8 @@ export function Hero({ content }: { content: LandingContent }) {
 
         {/* Las dos integraciones que más pesan para este público, a la vista desde la primera pantalla */}
         {hero.integrations && (
-          <p className="mt-3 flex items-center justify-center gap-2.5 text-[14px] font-medium text-fg-muted sm:text-[15px]">
+          // Ancho fijo con el contenido alineado a la izquierda (centrado a ojo): al cambiar de fuente no se mueve (CLS 0)
+          <p className="mt-3 flex w-[320px] max-w-full items-center justify-start gap-2.5 whitespace-nowrap text-[14px] font-medium text-fg-muted sm:w-[340px] sm:text-[15px] lg:mt-2">
             <span className="flex items-center gap-1.5" aria-hidden>
               {hero.integrations.tools.map((id) => (
                 <ToolDisc key={id} id={id} size={30} eager />
@@ -59,17 +60,17 @@ export function Hero({ content }: { content: LandingContent }) {
           </p>
         )}
 
-        <div className="hero-video mt-4 w-full lg:mt-4">
+        <div className="hero-video mt-4 w-full lg:mt-3">
           <MainVsl slug={slug} label={hero.videoLabel} endCta={hero.videoEnd} />
         </div>
 
         {/* Prueba social discreta bajo el vídeo: etiqueta pequeña y una fila de logotipos, sin caja */}
-        <div className="mt-3 w-full lg:mt-3">
+        <div className="mt-3 w-full lg:mt-2.5">
           <p className="mb-2 text-center text-[12px] font-medium text-fg-muted">Clientes de Fivo</p>
           <ClientLogos />
         </div>
 
-        <div className="mt-4 w-full sm:w-auto lg:mt-4">
+        <div className="mt-4 w-full sm:w-auto lg:mt-3">
           <CtaBlock position="hero" size="lg" align="center" heroAnchor />
         </div>
 

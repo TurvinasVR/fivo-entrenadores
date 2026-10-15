@@ -26,7 +26,7 @@ export const entrenadores: LandingContent = {
     label: "Para entrenadores personales con equipo",
     title: "El segundo cerebro de tu negocio de entrenamiento",
     subtitle:
-      "Fivo conecta GoHighLevel, Harbiz y las herramientas de tu equipo en una sola memoria. Pregúntale cómo va cualquier cliente, lead o persona de tu equipo, también desde Claude o ChatGPT.",
+      "Fivo conecta las herramientas de tu equipo en una sola memoria. Pregúntale cómo va cualquier cliente, lead o persona de tu equipo, también desde Claude o ChatGPT.",
     videoLabel: "Vídeo de Fivo para entrenadores personales",
     videoEnd: { title: "¿Lo vemos con tu negocio?", replay: "Volver a ver" },
     trust: "Cumple RGPD. Datos alojados en la UE. Tú decides quién ve qué.",

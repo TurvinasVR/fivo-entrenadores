@@ -267,6 +267,7 @@ button:hover > .cta-arrow[data-dir="right"] {
   background-color: transparent;
   border-bottom: 1px solid transparent;
   transition:
+    transform 0.3s var(--ease-out-expo),
     background-color 0.3s var(--ease-out-expo),
     border-color 0.3s var(--ease-out-expo),
     backdrop-filter 0.3s var(--ease-out-expo),
@@ -275,6 +276,14 @@ button:hover > .cta-arrow[data-dir="right"] {
 .topbar[data-scrolled] {
   background-color: var(--color-bg);
   border-bottom-color: var(--color-line);
+  /* De 64 a 56 px visibles: la barra sube 8 px y su contenido baja 4 px para seguir centrado */
+  transform: translateY(-8px);
+}
+.topbar-inner {
+  transition: transform 0.3s var(--ease-out-expo);
+}
+.topbar[data-scrolled] .topbar-inner {
+  transform: translateY(4px);
 }
 @supports (backdrop-filter: blur(1px)) or (-webkit-backdrop-filter: blur(1px)) {
   .topbar[data-scrolled] {
@@ -375,7 +384,8 @@ html[data-consent-open] .sticky-cta {
 }
 @media (min-width: 1024px) {
   .hero-video {
-    width: min(760px, max(440px, calc((100dvh - 505px) * 16 / 9)));
+    /* 525px: todo lo que no es vídeo en la primera pantalla, con 24px o más bajo la línea "30 minutos" a 1440x900 y 1366x768 */
+    width: min(760px, max(420px, calc((100dvh - 525px) * 16 / 9)));
   }
 }
 

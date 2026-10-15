@@ -24,7 +24,8 @@ export function TopBar() {
 
   return (
     <header className="topbar fixed inset-x-0 top-0 z-[40]" data-scrolled={scrolled ? "" : undefined}>
-      <div className={`mx-auto flex max-w-[1280px] items-center justify-between px-5 transition-[height] duration-300 lg:px-10 ${scrolled ? "h-14" : "h-16"}`}>
+      {/* Compacta (56 px) con transform, no con height: así no cuenta como salto de diseño (CLS) */}
+      <div className="topbar-inner mx-auto flex h-16 max-w-[1280px] items-center justify-between px-5 lg:px-10">
         {/* Logotipo oficial de fivo.ai (versión blanca del encabezado), sin redibujar */}
         {/* eslint-disable-next-line @next/next/no-img-element */}
         <img src="/logos/fivo-wordmark-white.svg" alt="Fivo" width={103} height={33} className="h-[30px] w-auto" />

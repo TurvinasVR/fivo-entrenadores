@@ -1,14 +1,30 @@
 "use client";
 
 import { useCallback, useEffect, useRef, useState } from "react";
+import type { ReactNode } from "react";
 import { ArrowLeft, ArrowRight, Star } from "@phosphor-icons/react";
 import { REVIEWS } from "./reviewsData";
 
 /**
- * Opiniones de la calculadora original (mismas 10, una sola fuente: reviewsData.ts). Se usan bajo el resultado de /gracias y en la landing. Carrusel con scroll nativo: se pasa con el
- * dedo o la rueda y con las flechas. Tarjetas planas en surface, sin cajas dentro de cajas.
+ * Opiniones de la calculadora original (mismas 10, una sola fuente: reviewsData.ts, ordenadas de más a menos parecidas
+ * al negocio de un entrenador con equipo; no se edita ni una palabra). Se usan bajo el resultado de /gracias y en la
+ * landing. Carrusel con scroll nativo: se pasa con el dedo o la rueda y con las flechas. Tarjetas planas en surface,
+ * sin cajas dentro de cajas.
+ *
+ * `lead`: algo que va antes del carrusel, debajo del titular (los testimonios de entrenadores, cuando los hay). Con
+ * `lead`, las flechas bajan a su propia fila sobre el carrusel para quedar junto a lo que mueven.
  */
-export default function Reviews({ headingLevel = 3, className = "mt-14 lg:mt-20" }: { headingLevel?: 2 | 3; className?: string }) {
+export default function Reviews({
+  headingLevel = 3,
+  className = "mt-14 lg:mt-20",
+  title = "Opiniones sobre Fivo",
+  lead,
+}: {
+  headingLevel?: 2 | 3;
+  className?: string;
+  title?: string;
+  lead?: ReactNode;
+}) {
   const Heading = headingLevel === 2 ? "h2" : "h3";
   const track = useRef<HTMLDivElement>(null);
   const [atStart, setAtStart] = useState(true);
@@ -39,21 +55,27 @@ export default function Reviews({ headingLevel = 3, className = "mt-14 lg:mt-20"
   const arrow =
     "inline-flex size-11 items-center justify-center rounded-full border border-line text-fg transition-colors hover-ring-brand disabled:cursor-default disabled:opacity-40";
 
+  const controls = (
+    <div className="flex gap-2">
+      <button type="button" className={arrow} onClick={() => go(-1)} disabled={atStart} aria-label="Opinión anterior">
+        <ArrowLeft size={20} aria-hidden />
+      </button>
+      <button type="button" className={arrow} onClick={() => go(1)} disabled={atEnd} aria-label="Opinión siguiente">
+        <ArrowRight size={20} aria-hidden />
+      </button>
+    </div>
+  );
+
   return (
     <section aria-labelledby="opiniones" className={className}>
       <div className="flex items-end justify-between gap-4">
         <Heading id="opiniones" className="font-display text-[clamp(1.375rem,1rem+1.4vw,1.875rem)] font-black leading-tight tracking-[-0.015em]">
-          Opiniones sobre Fivo
+          {title}
         </Heading>
-        <div className="hidden gap-2 sm:flex">
-          <button type="button" className={arrow} onClick={() => go(-1)} disabled={atStart} aria-label="Opinión anterior">
-            <ArrowLeft size={20} aria-hidden />
-          </button>
-          <button type="button" className={arrow} onClick={() => go(1)} disabled={atEnd} aria-label="Opinión siguiente">
-            <ArrowRight size={20} aria-hidden />
-          </button>
-        </div>
+        {!lead && <div className="hidden sm:block">{controls}</div>}
       </div>
+      {lead && <div className="mt-8 lg:mt-10">{lead}</div>}
+      {lead && <div className="mt-10 hidden justify-end sm:flex">{controls}</div>}
 
       <div
         ref={track}

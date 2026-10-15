@@ -1,20 +1,15 @@
 "use client";
 
-import { siteConfig } from "@/config/site";
 import { Reveal } from "./Reveal";
-import { TestimonialCard } from "./Testimonial";
 import { useLanding } from "./landing/LandingContext";
 
 /**
- * Bloque 7. Prueba de escala: cuatro cifras grandes con su etiqueta. Los logotipos de clientes y los
- * testimonios se suman debajo si la landing los usa (en producción los testimonios siguen ocultos
- * hasta que haya reales).
+ * Prueba de escala: cuatro cifras grandes con su etiqueta. Los testimonios de entrenadores ya no van aquí:
+ * salen antes de las reseñas (ver TestimonialsBlock) cuando haya reales y se active en la configuración.
  */
 export function Proof() {
-  const { slug, proof } = useLanding();
+  const { proof } = useLanding();
   const SCALE = proof.scale;
-  const showTestimonials = siteConfig.landings[slug].ready.testimonials && proof.testimonials.length > 0;
-  const [main, ...rest] = proof.testimonials;
   return (
     <section aria-labelledby="prueba">
       <div className="mx-auto max-w-[1120px] px-5 pb-5 pt-12 lg:px-10 lg:pb-8 lg:pt-20">
@@ -36,20 +31,6 @@ export function Proof() {
             </Reveal>
           ))}
         </dl>
-        {showTestimonials && (
-          <div className="mt-12 grid gap-4 lg:mt-16 lg:grid-cols-12 lg:gap-5">
-            <Reveal className="lg:col-span-7">
-              <TestimonialCard data={main} featured />
-            </Reveal>
-            <div className="grid gap-4 lg:col-span-5 lg:gap-5">
-              {rest.map((t, i) => (
-                <Reveal key={i} delay={(i + 1) * 120}>
-                  <TestimonialCard data={t} />
-                </Reveal>
-              ))}
-            </div>
-          </div>
-        )}
       </div>
     </section>
   );

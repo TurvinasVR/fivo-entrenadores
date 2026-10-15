@@ -5,15 +5,23 @@ export type LandingSlug = "entrenadores";
 
 export type ScaleFigure = { figure: string; label: string; sr: string };
 
+/**
+ * Testimonio de un entrenador. Va en `proof.testimonials` y se activa con `ready.testimonials` en src/config/site.ts:
+ * entonces sale justo antes del resto de reseñas. Sin testimonios reales (o con `ready` en false) no se ve nada.
+ */
 export type TestimonialData = {
-  /** Foto o logotipo. Sin él, la tarjeta muestra la inicial del nombre. */
+  /** Foto, p. ej. "/testimonios/nombre.webp" (en public/). Sin ella, la tarjeta muestra la inicial del nombre. */
   logoOrPhoto: string | null;
   name: string;
+  /** Tipo de negocio, p. ej. "Coach online". */
   role: string;
-  /** Segunda línea bajo el nombre (p. ej. el tamaño del equipo). */
-  extra?: string;
+  /** Tamaño del equipo, p. ej. "Equipo de 6 personas". */
+  extra: string;
+  /** La frase, de tres líneas como máximo. */
   quote: string;
+  /** El resultado: la cifra (p. ej. "+30 %")... */
   figure: string;
+  /** ...y lo que mide (p. ej. "renovaciones en tres meses"). Solo datos reales y confirmados por el cliente. */
   figureLabel: string;
 };
 
@@ -154,9 +162,13 @@ export type LandingContent = {
     questions: AskQuestion[];
   };
 
+  /** Reseñas de clientes (el carrusel va justo después de la primera pantalla). */
+  reviews: { title: string };
+
   proof: {
     title: string;
     scale: ScaleFigure[];
+    /** Testimonios de entrenadores: salen antes de las reseñas cuando `ready.testimonials` está activo. */
     testimonials: TestimonialData[];
   };
 

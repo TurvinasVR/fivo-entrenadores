@@ -361,9 +361,24 @@ export const entrenadores: LandingContent = {
     ],
   },
 
+  reviews: {
+    title: "Lo que dicen los equipos que ya trabajan con Fivo",
+  },
+
   proof: {
     title: "Fivo ya funciona a esta escala",
     scale: SCALE,
+    // Testimonios de entrenadores (hoy ninguno: no se inventan). Cuando haya reales, se añaden aquí con esta forma y se
+    // pone `ready.testimonials` a true en src/config/site.ts; salen antes del resto de reseñas:
+    //   {
+    //     logoOrPhoto: "/testimonios/nombre.webp",
+    //     name: "Nombre y apellidos",
+    //     role: "Coach online",
+    //     extra: "Equipo de 6 personas",
+    //     quote: "La frase, de tres líneas como máximo.",
+    //     figure: "La cifra del resultado",
+    //     figureLabel: "Lo que mide esa cifra",
+    //   },
     testimonials: [],
   },
 

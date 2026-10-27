@@ -24,6 +24,8 @@ dist
 
 # Documentos internos: solo en el disco local, nunca en GitHub
 PROMPT.md
+PROMPT-v2.md
+CONTEXTO.md
 PRODUCT.md
 PENDIENTES.md
 CALCULADORA-TEXTOS.md
